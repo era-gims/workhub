@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#0f766e">
+
+  <title>WorkHub Dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">
+    Work<span>Hub</span>
+  </div>
+
+  <button
+    class="menu-btn"
+    onclick="toggleMenu()">
+    ☰
+  </button>
+
+  <nav id="navMenu">
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="#profile">
+      My Profile
+    </a>
+
+    <a href="#jobs">
+      Find Jobs
+    </a>
+
+    <button
+      onclick="logout()">
+      Logout
+    </button>
+
+  </nav>
+
+</header>
+
+
+<main>
+
+<section class="dashboard-hero">
+
+  <p class="welcome">
+    WORKHUB DASHBOARD
+  </p>
+
+  <h1>
+    Welcome, <span id="userName">there</span> 👋
+  </h1>
+
+  <p>
+    Manage your WorkHub account and discover
+    opportunities.
+  </p>
+
+</section>
+
+
+<section class="dashboard">
+
+  <div class="dashboard-card">
+
+    <div class="dashboard-icon">
+      👤
+    </div>
+
+    <h2>
+      My Profile
+    </h2>
+
+    <p>
+      Create and manage your professional profile.
+    </p>
+
+    <button onclick="comingSoon('My Profile')">
+      Open Profile
+    </button>
+
+  </div>
+
+
+  <div class="dashboard-card">
+
+    <div class="dashboard-icon">
+      🔎
+    </div>
+
+    <h2>
+      Find Jobs
+    </h2>
+
+    <p>
+      Search for jobs and employment opportunities.
+    </p>
+
+    <button onclick="comingSoon('Find Jobs')">
+      Find Jobs
+    </button>
+
+  </div>
+
+
+  <div class="dashboard-card">
+
+    <div class="dashboard-icon">
+      📄
+    </div>
+
+    <h2>
+      My Applications
+    </h2>
+
+    <p>
+      Track jobs you have applied for.
+    </p>
+
+    <button onclick="comingSoon('My Applications')">
+      View Applications
+    </button>
+
+  </div>
+
+
+  <div class="dashboard-card">
+
+    <div class="dashboard-icon">
+      ⭐
+    </div>
+
+    <h2>
+      Saved Jobs
+    </h2>
+
+    <p>
+      Keep interesting opportunities for later.
+    </p>
+
+    <button onclick="comingSoon('Saved Jobs')">
+      Saved Jobs
+    </button>
+
+  </div>
+
+
+  <div class="dashboard-card">
+
+    <div class="dashboard-icon">
+      🛠️
+    </div>
+
+    <h2>
+      My Services
+    </h2>
+
+    <p>
+      Offer your skills and services to customers.
+    </p>
+
+    <button onclick="comingSoon('My Services')">
+      My Services
+    </button>
+
+  </div>
+
+
+  <div class="dashboard-card">
+
+    <div class="dashboard-icon">
+      💼
+    </div>
+
+    <h2>
+      Post a Job
+    </h2>
+
+    <p>
+      Looking for workers? Create a job listing.
+    </p>
+
+    <button onclick="comingSoon('Post a Job')">
+      Post a Job
+    </button>
+
+  </div>
+
+</section>
+
+
+<section class="dashboard-bottom">
+
+  <h2>
+    More features coming soon 🚀
+  </h2>
+
+  <p>
+    WorkHub will bring jobs, workers, gigs,
+    services and more together in one platform.
+  </p>
+
+</section>
+
+</main>
+
+
+<footer>
+
+  <div class="logo">
+    Work<span>Hub</span>
+  </div>
+
+  <p>
+    Find work. Find workers. Get things done.
+  </p>
+
+  <p class="copyright">
+    © 2026 WorkHub
+  </p>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://pnfyyjufupcpphzfxgim.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_dfSstSml6StUx2BuFG0XBA_NnxKrQ_P";
+
+const { createClient } = supabase;
+
+const supabaseClient =
+  createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+async function loadUser() {
+
+  const {
+    data: {
+      user
+    }
+  } =
+    await supabaseClient.auth.getUser();
+
+
+  if (!user) {
+
+    window.location.href =
+      "index.html";
+
+    return;
+  }
+
+
+  const name =
+    user.user_metadata?.full_name
+    || user.email
+    || "there";
+
+
+  document.getElementById(
+    "userName"
+  ).textContent = name;
+
+}
+
+
+async function logout() {
+
+  await supabaseClient.auth.signOut();
+
+  window.location.href =
+    "index.html";
+
+}
+
+
+function comingSoon(feature) {
+
+  alert(
+    feature +
+    " is coming soon. We're building it!"
+  );
+
+}
+
+
+loadUser();
+
+</script>
+
+</body>
+  </html>

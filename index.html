@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="Find jobs, workers, gigs and services in one place.">
+
+  <title>WorkHub - Find Work. Find Workers.</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="navbar">
+    <div class="logo">Work<span>Hub</span></div>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav id="navMenu">
+      <a href="#jobs">Jobs</a>
+      <a href="#workers">Workers</a>
+      <a href="#gigs">Gigs</a>
+      <a href="#services">Services</a>
+      <a href="#login">Login</a>
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+  <main>
+
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <p class="welcome">WELCOME TO WORKHUB</p>
+
+        <h1>
+          Find work.<br>
+          Find workers.<br>
+          <span>Get things done.</span>
+        </h1>
+
+        <p class="hero-text">
+          A simple place to find jobs, hire workers,
+          discover gigs and offer your skills.
+        </p>
+
+        <div class="hero-buttons">
+          <button onclick="showMessage('Find Jobs')">
+            🔎 Find Jobs
+          </button>
+
+          <button class="secondary" onclick="showMessage('Post a Job')">
+            💼 Post a Job
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SEARCH -->
+    <section class="search-section">
+
+      <h2>What are you looking for?</h2>
+
+      <div class="search-box">
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Job, skill or service..."
+        >
+
+        <select id="location">
+          <option value="">Any location</option>
+          <option>Accra</option>
+          <option>Kumasi</option>
+          <option>Tema</option>
+          <option>Takoradi</option>
+          <option>Cape Coast</option>
+          <option>Other</option>
+        </select>
+
+        <button onclick="searchPlatform()">
+          Search
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features">
+
+      <div class="feature-card" onclick="showMessage('Jobs')">
+        <div class="feature-icon">💼</div>
+        <h3>Find Jobs</h3>
+        <p>
+          Discover full-time, part-time,
+          temporary and remote opportunities.
+        </p>
+      </div>
+
+
+      <div class="feature-card" onclick="showMessage('Workers')">
+        <div class="feature-icon">👷</div>
+        <h3>Find Workers</h3>
+        <p>
+          Find people with the skills
+          your business needs.
+        </p>
+      </div>
+
+
+      <div class="feature-card" onclick="showMessage('Gigs')">
+        <div class="feature-icon">⚡</div>
+        <h3>Find Gigs</h3>
+        <p>
+          Find short-term and one-time
+          opportunities.
+        </p>
+      </div>
+
+
+      <div class="feature-card" onclick="showMessage('Services')">
+        <div class="feature-icon">🛠️</div>
+        <h3>Offer a Service</h3>
+        <p>
+          Turn your skills into income
+          by offering your services.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- HOW IT WORKS -->
+    <section class="how">
+
+      <p class="section-label">HOW IT WORKS</p>
+
+      <h2>One platform. Many opportunities.</h2>
+
+      <div class="steps">
+
+        <div class="step">
+          <div>1</div>
+          <h3>Create your profile</h3>
+          <p>
+            Tell employers or customers
+            what you can do.
+          </p>
+        </div>
+
+        <div class="step">
+          <div>2</div>
+          <h3>Discover opportunities</h3>
+          <p>
+            Search jobs, gigs, workers
+            or services.
+          </p>
+        </div>
+
+        <div class="step">
+          <div>3</div>
+          <h3>Connect</h3>
+          <p>
+            Apply, contact or hire
+            directly.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CALL TO ACTION -->
+    <section class="cta">
+
+      <h2>Ready to get started?</h2>
+
+      <p>
+        Create your free profile and start
+        discovering opportunities.
+      </p>
+
+      <button onclick="showMessage('Sign Up')">
+        Create Free Account
+      </button>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <div class="logo">Work<span>Hub</span></div>
+
+    <p>
+      Find work. Find workers. Get things done.
+    </p>
+
+    <p class="copyright">
+      © 2026 WorkHub
+    </p>
+
+  </footer>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>

@@ -178,9 +178,12 @@ document.getElementById("authForm").addEventListener(
 
 
       result.textContent =
-        "Login successful! Welcome to WorkHub.";
+        result.textContent =
+  "Login successful! Opening your dashboard...";
 
-    }
+setTimeout(() => {
+  window.location.href = "dashboard.html";
+}, 800);
 
   }
 );

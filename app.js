@@ -13,189 +13,400 @@ const supabaseClient = createClient(
 let authMode = "signup";
 
 
+/* =========================
+   MOBILE MENU
+========================= */
+
 function toggleMenu() {
+
   const menu = document.getElementById("navMenu");
-  menu.classList.toggle("active");
+
+  if (menu) {
+    menu.classList.toggle("active");
+  }
+
 }
 
+
+/* =========================
+   OPEN LOGIN / SIGNUP
+========================= */
 
 function showAuth(mode) {
 
   authMode = mode;
 
-  document.getElementById("authSection").scrollIntoView({
-    behavior: "smooth"
-  });
+  const authSection =
+    document.getElementById("authSection");
+
+  if (authSection) {
+
+    authSection.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
 
   updateAuthForm();
+
 }
 
+
+/* =========================
+   SWITCH LOGIN / SIGNUP
+========================= */
 
 function switchAuthMode() {
 
-  authMode = authMode === "signup"
-    ? "login"
-    : "signup";
+  authMode =
+    authMode === "signup"
+      ? "login"
+      : "signup";
 
   updateAuthForm();
+
 }
 
+
+/* =========================
+   UPDATE AUTH FORM
+========================= */
 
 function updateAuthForm() {
 
-  const signup = authMode === "signup";
+  const signup =
+    authMode === "signup";
 
-  document.getElementById("authTitle").textContent =
-    signup
-      ? "Create your WorkHub account"
-      : "Login to WorkHub";
 
-  document.getElementById("authMessage").textContent =
-    signup
-      ? "Join WorkHub for free."
-      : "Welcome back.";
+  const authTitle =
+    document.getElementById("authTitle");
 
-  document.getElementById("nameField").style.display =
-    signup ? "block" : "none";
+  const authMessage =
+    document.getElementById("authMessage");
 
-  document.getElementById("roleField").style.display =
-    signup ? "block" : "none";
+  const nameField =
+    document.getElementById("nameField");
 
-  document.getElementById("authButton").textContent =
-    signup ? "Create Account" : "Login";
+  const roleField =
+    document.getElementById("roleField");
 
-  document.getElementById("switchButton").textContent =
-    signup
-      ? "Already have an account? Login"
-      : "Don't have an account? Sign up";
+  const authButton =
+    document.getElementById("authButton");
 
-  document.getElementById("authResult").textContent = "";
+  const switchButton =
+    document.getElementById("switchButton");
+
+  const authResult =
+    document.getElementById("authResult");
+
+
+  if (authTitle) {
+
+    authTitle.textContent =
+      signup
+        ? "Create your WorkHub account"
+        : "Login to WorkHub";
+
+  }
+
+
+  if (authMessage) {
+
+    authMessage.textContent =
+      signup
+        ? "Join WorkHub for free."
+        : "Welcome back.";
+
+  }
+
+
+  if (nameField) {
+
+    nameField.style.display =
+      signup ? "block" : "none";
+
+  }
+
+
+  if (roleField) {
+
+    roleField.style.display =
+      signup ? "block" : "none";
+
+  }
+
+
+  if (authButton) {
+
+    authButton.textContent =
+      signup
+        ? "Create Account"
+        : "Login";
+
+  }
+
+
+  if (switchButton) {
+
+    switchButton.textContent =
+      signup
+        ? "Already have an account? Login"
+        : "Don't have an account? Sign up";
+
+  }
+
+
+  if (authResult) {
+
+    authResult.textContent = "";
+
+  }
+
 }
 
 
-document.getElementById("authForm").addEventListener(
-  "submit",
-  async function(event) {
+/* =========================
+   AUTHENTICATION FORM
+========================= */
 
-    event.preventDefault();
-
-    const email =
-      document.getElementById("email").value.trim();
-
-    const password =
-      document.getElementById("password").value;
-
-    const result =
-      document.getElementById("authResult");
-
-    result.textContent = "Please wait...";
+const authForm =
+  document.getElementById("authForm");
 
 
-    if (authMode === "signup") {
+if (authForm) {
 
-      const fullName =
-        document.getElementById("fullName").value.trim();
+  authForm.addEventListener(
+    "submit",
+    async function(event) {
 
-      const role =
-        document.getElementById("role").value;
+      event.preventDefault();
 
 
-      const { data, error } =
-        await supabaseClient.auth.signUp({
+      const email =
+        document.getElementById("email")
+          .value
+          .trim();
 
-          email: email,
 
-          password: password,
+      const password =
+        document.getElementById("password")
+          .value;
 
-          options: {
-            data: {
-              full_name: fullName,
-              role: role
+
+      const result =
+        document.getElementById("authResult");
+
+
+      result.textContent =
+        "Please wait...";
+
+
+      /* =====================
+         SIGN UP
+      ===================== */
+
+      if (authMode === "signup") {
+
+
+        const fullName =
+          document
+            .getElementById("fullName")
+            .value
+            .trim();
+
+
+        const role =
+          document
+            .getElementById("role")
+            .value;
+
+
+        if (!fullName) {
+
+          result.textContent =
+            "Please enter your full name.";
+
+          return;
+
+        }
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password,
+
+            options: {
+
+              data: {
+
+                full_name: fullName,
+
+                role: role
+
+              }
+
             }
+
+          });
+
+
+        if (error) {
+
+          result.textContent =
+            "Error: " +
+            error.message;
+
+          return;
+
+        }
+
+
+        if (data.user) {
+
+
+          /*
+             Create the user's profile.
+          */
+
+          const {
+            error: profileError
+          } =
+            await supabaseClient
+              .from("profiles")
+              .insert({
+
+                id: data.user.id,
+
+                full_name: fullName,
+
+                role: role
+
+              });
+
+
+          if (profileError) {
+
+            /*
+              The account was created even if
+              the profile insert failed.
+            */
+
+            result.textContent =
+              "Account created, but profile setup failed: " +
+              profileError.message;
+
+            return;
+
           }
 
-        });
+
+          result.textContent =
+            "Account created successfully!";
 
 
-      if (error) {
+          /*
+             Since email confirmation is disabled,
+             take the user directly to dashboard.
+          */
 
-        result.textContent =
-          "Error: " + error.message;
+          setTimeout(function() {
 
-        return;
+            window.location.href =
+              "dashboard.html";
+
+          }, 1000);
+
+        }
+
       }
 
 
-      if (data.user) {
+      /* =====================
+         LOGIN
+      ===================== */
 
-        const { error: profileError } =
-          await supabaseClient
-            .from("profiles")
-            .insert({
+      else {
 
-              id: data.user.id,
 
-              full_name: fullName,
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth
+            .signInWithPassword({
 
-              role: role
+              email: email,
+
+              password: password
 
             });
 
 
-        if (profileError) {
+        if (error) {
 
           result.textContent =
-            "Account created, but profile setup failed: "
-            + profileError.message;
+            "Login failed: " +
+            error.message;
 
           return;
+
         }
 
-        result.textContent =
-          "Account created successfully! Check your email if confirmation is required.";
+
+        if (data.user) {
+
+          result.textContent =
+            "Login successful! Opening your dashboard...";
+
+
+          setTimeout(function() {
+
+            window.location.href =
+              "dashboard.html";
+
+          }, 800);
+
+        }
 
       }
 
-    } else {
+    }
+  );
 
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-
-          email: email,
-
-          password: password
-
-        });
+}
 
 
-      if (error) {
-
-        result.textContent =
-          "Login failed: " + error.message;
-
-        return;
-      }
-
-
-      result.textContent =
-        result.textContent =
-  "Login successful! Opening your dashboard...";
-
-setTimeout(() => {
-  window.location.href = "dashboard.html";
-}, 800);
-
-  }
-);
-
+/* =========================
+   SEARCH JOBS
+========================= */
 
 async function searchPlatform() {
 
+
+  const searchInput =
+    document.getElementById("searchInput");
+
+
+  const locationInput =
+    document.getElementById("location");
+
+
   const search =
-    document.getElementById("searchInput").value;
+    searchInput
+      ? searchInput.value.trim()
+      : "";
+
 
   const location =
-    document.getElementById("location").value;
+    locationInput
+      ? locationInput.value
+      : "";
 
 
   let query =
@@ -207,43 +418,53 @@ async function searchPlatform() {
 
   if (search) {
 
-    query = query.ilike(
-      "title",
-      "%" + search + "%"
-    );
+    query =
+      query.ilike(
+        "title",
+        "%" + search + "%"
+      );
 
   }
 
 
   if (location) {
 
-    query = query.ilike(
-      "location",
-      "%" + location + "%"
-    );
+    query =
+      query.ilike(
+        "location",
+        "%" + location + "%"
+      );
 
   }
 
 
-  const { data, error } =
+  const {
+    data,
+    error
+  } =
     await query;
 
 
   if (error) {
 
     alert(
-      "Search error: " + error.message
+      "Search error: " +
+      error.message
     );
 
     return;
+
   }
 
 
-  if (!data.length) {
+  if (!data || data.length === 0) {
 
-    alert("No matching jobs found yet.");
+    alert(
+      "No matching jobs found yet."
+    );
 
     return;
+
   }
 
 
@@ -253,3 +474,10 @@ async function searchPlatform() {
   );
 
 }
+
+
+/* =========================
+   INITIAL FORM STATE
+========================= */
+
+updateAuthForm();

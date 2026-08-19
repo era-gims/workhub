@@ -1,17 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta name="theme-color" content="#0f766e">
 
   <title>WorkHub Dashboard</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .dashboard-hero {
+      padding: 50px 20px 30px;
+      text-align: center;
+    }
+
+    .dashboard-hero h1 {
+      margin: 10px 0;
+    }
+
+    .dashboard {
+      width: 92%;
+      max-width: 1100px;
+      margin: 20px auto 50px;
+
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+
+      gap: 20px;
+    }
+
+    .dashboard-card {
+      padding: 25px;
+      border-radius: 15px;
+      background: white;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .dashboard-icon {
+      font-size: 35px;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-card button,
+    .profile-form button {
+      border: none;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    /* PROFILE */
+
+    #profileSection {
+      display: none;
+
+      width: 92%;
+      max-width: 800px;
+
+      margin: 20px auto 50px;
+
+      background: white;
+
+      padding: 25px;
+
+      border-radius: 15px;
+
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    #profileSection h2 {
+      margin-top: 0;
+    }
+
+    .profile-form {
+      display: grid;
+      gap: 15px;
+    }
+
+    .profile-form label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .profile-form input,
+    .profile-form textarea,
+    .profile-form select {
+      width: 100%;
+      box-sizing: border-box;
+
+      padding: 12px;
+
+      border: 1px solid #ddd;
+
+      border-radius: 8px;
+
+      font-size: 15px;
+    }
+
+    .profile-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .profile-message {
+      padding: 10px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .close-profile {
+      margin-bottom: 15px;
+      cursor: pointer;
+
+      border: none;
+
+      background: transparent;
+
+      font-size: 16px;
+    }
+  </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <header class="navbar">
 
@@ -21,9 +147,13 @@
 
   <button
     class="menu-btn"
+    type="button"
     onclick="toggleMenu()">
+
     ☰
+
   </button>
+
 
   <nav id="navMenu">
 
@@ -31,17 +161,28 @@
       Home
     </a>
 
-    <a href="#profile">
+    <a
+      href="#"
+      onclick="openProfile(); return false;">
+
       My Profile
+
     </a>
 
-    <a href="#jobs">
+    <a
+      href="#"
+      onclick="comingSoon('Find Jobs'); return false;">
+
       Find Jobs
+
     </a>
 
     <button
+      type="button"
       onclick="logout()">
+
       Logout
+
     </button>
 
   </nav>
@@ -49,7 +190,13 @@
 </header>
 
 
+
 <main>
+
+
+<!-- =========================
+     DASHBOARD HERO
+========================= -->
 
 <section class="dashboard-hero">
 
@@ -58,18 +205,28 @@
   </p>
 
   <h1>
-    Welcome, <span id="userName">there</span> 👋
+    Welcome,
+    <span id="userName">there</span>
+    👋
   </h1>
 
   <p>
-    Manage your WorkHub account and discover
-    opportunities.
+    Manage your WorkHub account and
+    discover opportunities.
   </p>
 
 </section>
 
 
+
+<!-- =========================
+     DASHBOARD CARDS
+========================= -->
+
 <section class="dashboard">
+
+
+  <!-- PROFILE -->
 
   <div class="dashboard-card">
 
@@ -82,15 +239,23 @@
     </h2>
 
     <p>
-      Create and manage your professional profile.
+      Create and manage your professional
+      profile.
     </p>
 
-    <button onclick="openProfile()">
+    <button
+      type="button"
+      onclick="openProfile()">
+
       Open Profile
+
     </button>
 
   </div>
 
+
+
+  <!-- FIND JOBS -->
 
   <div class="dashboard-card">
 
@@ -103,15 +268,23 @@
     </h2>
 
     <p>
-      Search for jobs and employment opportunities.
+      Search for jobs and employment
+      opportunities.
     </p>
 
-    <button onclick="comingSoon('Find Jobs')">
+    <button
+      type="button"
+      onclick="comingSoon('Find Jobs')">
+
       Find Jobs
+
     </button>
 
   </div>
 
+
+
+  <!-- APPLICATIONS -->
 
   <div class="dashboard-card">
 
@@ -127,12 +300,19 @@
       Track jobs you have applied for.
     </p>
 
-    <button onclick="comingSoon('My Applications')">
+    <button
+      type="button"
+      onclick="comingSoon('My Applications')">
+
       View Applications
+
     </button>
 
   </div>
 
+
+
+  <!-- SAVED JOBS -->
 
   <div class="dashboard-card">
 
@@ -145,15 +325,23 @@
     </h2>
 
     <p>
-      Keep interesting opportunities for later.
+      Keep interesting opportunities
+      for later.
     </p>
 
-    <button onclick="comingSoon('Saved Jobs')">
+    <button
+      type="button"
+      onclick="comingSoon('Saved Jobs')">
+
       Saved Jobs
+
     </button>
 
   </div>
 
+
+
+  <!-- SERVICES -->
 
   <div class="dashboard-card">
 
@@ -166,15 +354,23 @@
     </h2>
 
     <p>
-      Offer your skills and services to customers.
+      Offer your skills and services
+      to customers.
     </p>
 
-    <button onclick="comingSoon('My Services')">
+    <button
+      type="button"
+      onclick="comingSoon('My Services')">
+
       My Services
+
     </button>
 
   </div>
 
+
+
+  <!-- POST JOB -->
 
   <div class="dashboard-card">
 
@@ -187,17 +383,257 @@
     </h2>
 
     <p>
-      Looking for workers? Create a job listing.
+      Looking for workers?
+      Create a job listing.
     </p>
 
-    <button onclick="comingSoon('Post a Job')">
+    <button
+      type="button"
+      onclick="comingSoon('Post a Job')">
+
       Post a Job
+
     </button>
 
   </div>
 
 </section>
 
+
+
+<!-- =========================
+     PROFILE SECTION
+========================= -->
+
+<section id="profileSection">
+
+  <button
+    class="close-profile"
+    type="button"
+    onclick="closeProfile()">
+
+    ← Back to Dashboard
+
+  </button>
+
+
+  <h2>
+    👤 My Profile
+  </h2>
+
+
+  <p>
+    Complete your profile so employers
+    can understand your skills and experience.
+  </p>
+
+
+  <form
+    id="profileForm"
+    class="profile-form">
+
+
+    <!-- FULL NAME -->
+
+    <div>
+
+      <label for="profileFullName">
+        Full Name
+      </label>
+
+      <input
+        id="profileFullName"
+        type="text"
+        placeholder="Your full name">
+
+    </div>
+
+
+
+    <!-- PHONE -->
+
+    <div>
+
+      <label for="profilePhone">
+        Phone
+      </label>
+
+      <input
+        id="profilePhone"
+        type="tel"
+        placeholder="Your phone number">
+
+    </div>
+
+
+
+    <!-- LOCATION -->
+
+    <div>
+
+      <label for="profileLocation">
+        Location
+      </label>
+
+      <input
+        id="profileLocation"
+        type="text"
+        placeholder="e.g. Accra, Ghana">
+
+    </div>
+
+
+
+    <!-- ROLE -->
+
+    <div>
+
+      <label for="profileRole">
+        I am
+      </label>
+
+      <select id="profileRole">
+
+        <option value="job_seeker">
+          Job Seeker
+        </option>
+
+        <option value="employer">
+          Employer
+        </option>
+
+        <option value="both">
+          Both Job Seeker & Employer
+        </option>
+
+      </select>
+
+    </div>
+
+
+
+    <!-- SKILLS -->
+
+    <div>
+
+      <label for="profileSkills">
+        Skills
+      </label>
+
+      <textarea
+        id="profileSkills"
+        placeholder="e.g. Graphic Design, Marketing, Plumbing, Programming"></textarea>
+
+    </div>
+
+
+
+    <!-- EDUCATION -->
+
+    <div>
+
+      <label for="profileEducation">
+        Education
+      </label>
+
+      <textarea
+        id="profileEducation"
+        placeholder="Your education and qualifications"></textarea>
+
+    </div>
+
+
+
+    <!-- EXPERIENCE -->
+
+    <div>
+
+      <label for="profileExperience">
+        Experience
+      </label>
+
+      <textarea
+        id="profileExperience"
+        placeholder="Describe your work experience"></textarea>
+
+    </div>
+
+
+
+    <!-- EXPECTED SALARY -->
+
+    <div>
+
+      <label for="profileSalary">
+        Expected Salary / Rate
+      </label>
+
+      <input
+        id="profileSalary"
+        type="number"
+        min="0"
+        placeholder="e.g. 2500">
+
+    </div>
+
+
+
+    <!-- BIO -->
+
+    <div>
+
+      <label for="profileBio">
+        About Me
+      </label>
+
+      <textarea
+        id="profileBio"
+        placeholder="Tell employers about yourself"></textarea>
+
+    </div>
+
+
+
+    <!-- MESSAGE -->
+
+    <div
+      id="profileMessage"
+      class="profile-message">
+    </div>
+
+
+
+    <!-- BUTTONS -->
+
+    <div class="profile-actions">
+
+      <button
+        type="submit">
+
+        💾 Save Profile
+
+      </button>
+
+
+      <button
+        type="button"
+        onclick="closeProfile()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </form>
+
+</section>
+
+
+
+<!-- =========================
+     BOTTOM
+========================= -->
 
 <section class="dashboard-bottom">
 
@@ -206,14 +642,20 @@
   </h2>
 
   <p>
-    WorkHub will bring jobs, workers, gigs,
-    services and more together in one platform.
+    WorkHub will bring jobs, workers,
+    gigs, services and more together
+    in one platform.
   </p>
 
 </section>
 
 </main>
 
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
@@ -222,7 +664,8 @@
   </div>
 
   <p>
-    Find work. Find workers. Get things done.
+    Find work. Find workers.
+    Get things done.
   </p>
 
   <p class="copyright">
@@ -232,9 +675,20 @@
 </footer>
 
 
+
+<!-- =========================
+     SUPABASE LIBRARY
+========================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
+
 <script>
+
+/* =========================
+   SUPABASE CONNECTION
+========================= */
 
 const SUPABASE_URL =
   "https://pnfyyjufupcpphzfxgim.supabase.co";
@@ -242,56 +696,526 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_dfSstSml6StUx2BuFG0XBA_NnxKrQ_P";
 
-const { createClient } = supabase;
-
 const supabaseClient =
-  createClient(
+  window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
   );
 
 
+let currentUser = null;
+
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+function toggleMenu() {
+
+  const menu =
+    document.getElementById("navMenu");
+
+  if (menu) {
+
+    menu.classList.toggle("active");
+
+  }
+
+}
+
+
+
+/* =========================
+   LOAD LOGGED-IN USER
+========================= */
+
 async function loadUser() {
 
-  const {
-    data: {
-      user
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.getUser();
+
+
+    if (error) {
+
+      console.error(
+        "User error:",
+        error.message
+      );
+
+      return;
+
     }
-  } =
-    await supabaseClient.auth.getUser();
 
 
-  if (!user) {
+    const user =
+      data.user;
 
-    window.location.href =
-      "index.html";
 
-    return;
+    if (!user) {
+
+      window.location.href =
+        "index.html";
+
+      return;
+
+    }
+
+
+    currentUser =
+      user;
+
+
+    const name =
+      user.user_metadata?.full_name
+      ||
+      user.email
+      ||
+      "there";
+
+
+    const userName =
+      document.getElementById(
+        "userName"
+      );
+
+
+    if (userName) {
+
+      userName.textContent =
+        name;
+
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Load user error:",
+      error
+    );
+
+  }
+
+}
+
+
+
+/* =========================
+   OPEN PROFILE
+========================= */
+
+async function openProfile() {
+
+  const dashboard =
+    document.querySelector(
+      ".dashboard"
+    );
+
+  const hero =
+    document.querySelector(
+      ".dashboard-hero"
+    );
+
+  const bottom =
+    document.querySelector(
+      ".dashboard-bottom"
+    );
+
+  const profile =
+    document.getElementById(
+      "profileSection"
+    );
+
+
+  if (dashboard) {
+
+    dashboard.style.display =
+      "none";
+
   }
 
 
-  const name =
-    user.user_metadata?.full_name
-    || user.email
-    || "there";
+  if (hero) {
+
+    hero.style.display =
+      "none";
+
+  }
 
 
-  document.getElementById(
-    "userName"
-  ).textContent = name;
+  if (bottom) {
+
+    bottom.style.display =
+      "none";
+
+  }
+
+
+  if (profile) {
+
+    profile.style.display =
+      "block";
+
+    profile.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  await loadProfile();
 
 }
 
 
-async function logout() {
 
-  await supabaseClient.auth.signOut();
+/* =========================
+   CLOSE PROFILE
+========================= */
 
-  window.location.href =
-    "index.html";
+function closeProfile() {
+
+  const dashboard =
+    document.querySelector(
+      ".dashboard"
+    );
+
+  const hero =
+    document.querySelector(
+      ".dashboard-hero"
+    );
+
+  const bottom =
+    document.querySelector(
+      ".dashboard-bottom"
+    );
+
+  const profile =
+    document.getElementById(
+      "profileSection"
+    );
+
+
+  if (dashboard) {
+
+    dashboard.style.display =
+      "grid";
+
+  }
+
+
+  if (hero) {
+
+    hero.style.display =
+      "block";
+
+  }
+
+
+  if (bottom) {
+
+    bottom.style.display =
+      "block";
+
+  }
+
+
+  if (profile) {
+
+    profile.style.display =
+      "none";
+
+  }
 
 }
 
+
+
+/* =========================
+   LOAD EXISTING PROFILE
+========================= */
+
+async function loadProfile() {
+
+  if (!currentUser) {
+
+    return;
+
+  }
+
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select("*")
+        .eq(
+          "id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (error) {
+
+      console.error(
+        "Profile loading error:",
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    if (!data) {
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "profileFullName"
+    ).value =
+      data.full_name || "";
+
+
+    document.getElementById(
+      "profilePhone"
+    ).value =
+      data.phone || "";
+
+
+    document.getElementById(
+      "profileLocation"
+    ).value =
+      data.location || "";
+
+
+    document.getElementById(
+      "profileRole"
+    ).value =
+      data.role || "job_seeker";
+
+
+    document.getElementById(
+      "profileSkills"
+    ).value =
+      data.skills || "";
+
+
+    document.getElementById(
+      "profileEducation"
+    ).value =
+      data.education || "";
+
+
+    document.getElementById(
+      "profileExperience"
+    ).value =
+      data.experience || "";
+
+
+    document.getElementById(
+      "profileSalary"
+    ).value =
+      data.expected_salary || "";
+
+
+    document.getElementById(
+      "profileBio"
+    ).value =
+      data.bio || "";
+
+
+  } catch (error) {
+
+    console.error(
+      "Profile error:",
+      error
+    );
+
+  }
+
+}
+
+
+
+/* =========================
+   SAVE PROFILE
+========================= */
+
+document
+  .getElementById("profileForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      if (!currentUser) {
+
+        alert(
+          "You are not logged in."
+        );
+
+        return;
+
+      }
+
+
+      const message =
+        document.getElementById(
+          "profileMessage"
+        );
+
+
+      message.style.display =
+        "block";
+
+
+      message.textContent =
+        "Saving profile...";
+
+
+      const salaryValue =
+        document.getElementById(
+          "profileSalary"
+        ).value;
+
+
+      const profileData = {
+
+        id:
+          currentUser.id,
+
+        full_name:
+          document.getElementById(
+            "profileFullName"
+          ).value.trim(),
+
+        phone:
+          document.getElementById(
+            "profilePhone"
+          ).value.trim(),
+
+        location:
+          document.getElementById(
+            "profileLocation"
+          ).value.trim(),
+
+        role:
+          document.getElementById(
+            "profileRole"
+          ).value,
+
+        skills:
+          document.getElementById(
+            "profileSkills"
+          ).value.trim(),
+
+        education:
+          document.getElementById(
+            "profileEducation"
+          ).value.trim(),
+
+        experience:
+          document.getElementById(
+            "profileExperience"
+          ).value.trim(),
+
+        expected_salary:
+          salaryValue
+            ? Number(salaryValue)
+            : null,
+
+        bio:
+          document.getElementById(
+            "profileBio"
+          ).value.trim()
+
+      };
+
+
+      try {
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from("profiles")
+            .upsert(
+              profileData,
+              {
+                onConflict: "id"
+              }
+            );
+
+
+        if (error) {
+
+          console.error(
+            "Save profile error:",
+            error.message
+          );
+
+
+          message.textContent =
+            "Could not save profile: " +
+            error.message;
+
+          return;
+
+        }
+
+
+        message.textContent =
+          "✅ Profile saved successfully!";
+
+
+        document.getElementById(
+          "userName"
+        ).textContent =
+          profileData.full_name
+          ||
+          currentUser.email
+          ||
+          "there";
+
+
+      } catch (error) {
+
+        console.error(
+          "Save error:",
+          error
+        );
+
+
+        message.textContent =
+          "Something went wrong while saving.";
+
+      }
+
+    }
+  );
+
+
+
+/* =========================
+   COMING SOON
+========================= */
 
 function comingSoon(feature) {
 
@@ -303,13 +1227,59 @@ function comingSoon(feature) {
 }
 
 
-function openProfile() {
-  alert("My Profile is opening...");
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout() {
+
+  try {
+
+    const {
+      error
+    } =
+      await supabaseClient.auth.signOut();
+
+
+    if (error) {
+
+      alert(
+        "Logout failed: " +
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    window.location.href =
+      "index.html";
+
+
+  } catch (error) {
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+  }
+
 }
+
+
+
+/* =========================
+   START DASHBOARD
+========================= */
 
 loadUser();
 
 </script>
 
+
 </body>
+
   </html>

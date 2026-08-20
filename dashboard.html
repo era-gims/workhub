@@ -39,10 +39,8 @@
       width: 92%;
       max-width: 1100px;
       margin: 20px auto 50px;
-
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-
       gap: 20px;
     }
 
@@ -68,7 +66,6 @@
       font-size: 15px;
     }
 
-
     /* =========================
        PROFILE + JOB SECTIONS
     ========================= */
@@ -76,18 +73,12 @@
     #profileSection,
     #jobSection {
       display: none;
-
       width: 92%;
       max-width: 800px;
-
       margin: 20px auto 50px;
-
       background: white;
-
       padding: 25px;
-
       border-radius: 15px;
-
       box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
     }
 
@@ -112,20 +103,14 @@
     .profile-form input,
     .profile-form textarea,
     .profile-form select,
-
     .job-form input,
     .job-form textarea,
     .job-form select {
-
       width: 100%;
       box-sizing: border-box;
-
       padding: 12px;
-
       border: 1px solid #ddd;
-
       border-radius: 8px;
-
       font-size: 15px;
     }
 
@@ -153,11 +138,8 @@
     .close-job {
       margin-bottom: 15px;
       cursor: pointer;
-
       border: none;
-
       background: transparent;
-
       font-size: 16px;
     }
 
@@ -168,11 +150,9 @@
     }
 
     @media (max-width: 600px) {
-
       .salary-row {
         grid-template-columns: 1fr;
       }
-
     }
 
   </style>
@@ -202,7 +182,6 @@
 
   </button>
 
-
   <nav id="navMenu">
 
     <a href="index.html">
@@ -219,7 +198,7 @@
 
     <a
       href="#"
-      onclick="comingSoon('Find Jobs'); return false;">
+      onclick="openFindJobs(); return false;">
 
       Find Jobs
 
@@ -238,7 +217,6 @@
 </header>
 
 
-
 <main>
 
 
@@ -253,21 +231,15 @@
   </p>
 
   <h1>
-
     Welcome,
-    <span id="userName">
-      there
-    </span>
-
+    <span id="userName">there</span>
     👋
-
   </h1>
 
   <p>
     Manage your WorkHub account and
     discover opportunities.
   </p>
-
 
   <button
     type="button"
@@ -279,7 +251,6 @@
   </button>
 
 </section>
-
 
 
 <!-- =========================
@@ -317,7 +288,6 @@
   </div>
 
 
-
   <!-- FIND JOBS -->
 
   <div class="dashboard-card">
@@ -337,14 +307,13 @@
 
     <button
       type="button"
-      onclick="comingSoon('Find Jobs')">
+      onclick="openFindJobs()">
 
       Find Jobs
 
     </button>
 
   </div>
-
 
 
   <!-- APPLICATIONS -->
@@ -372,7 +341,6 @@
     </button>
 
   </div>
-
 
 
   <!-- SAVED JOBS -->
@@ -403,7 +371,6 @@
   </div>
 
 
-
   <!-- SERVICES -->
 
   <div class="dashboard-card">
@@ -430,7 +397,6 @@
     </button>
 
   </div>
-
 
 
   <!-- POST JOB -->
@@ -463,7 +429,6 @@
 </section>
 
 
-
 <!-- =========================
      PROFILE SECTION
 ========================= -->
@@ -479,22 +444,18 @@
 
   </button>
 
-
   <h2>
     👤 My Profile
   </h2>
-
 
   <p>
     Complete your profile so employers
     can understand your skills and experience.
   </p>
 
-
   <form
     id="profileForm"
     class="profile-form">
-
 
     <div>
 
@@ -639,11 +600,8 @@
     <div class="profile-actions">
 
       <button type="submit">
-
         💾 Save Profile
-
       </button>
-
 
       <button
         type="button"
@@ -658,7 +616,6 @@
   </form>
 
 </section>
-
 
 
 <!-- =========================
@@ -676,11 +633,9 @@
 
   </button>
 
-
   <h2>
     💼 Post a Job
   </h2>
-
 
   <p>
     Create a job listing and let workers
@@ -691,9 +646,6 @@
   <form
     id="jobForm"
     class="job-form">
-
-
-    <!-- JOB TITLE -->
 
     <div>
 
@@ -710,9 +662,6 @@
     </div>
 
 
-
-    <!-- DESCRIPTION -->
-
     <div>
 
       <label for="jobDescription">
@@ -726,9 +675,6 @@
 
     </div>
 
-
-
-    <!-- JOB TYPE -->
 
     <div>
 
@@ -773,9 +719,6 @@
     </div>
 
 
-
-    <!-- LOCATION -->
-
     <div>
 
       <label for="jobLocation">
@@ -790,9 +733,6 @@
 
     </div>
 
-
-
-    <!-- SALARY -->
 
     <div class="salary-row">
 
@@ -828,9 +768,6 @@
     </div>
 
 
-
-    <!-- SKILLS -->
-
     <div>
 
       <label for="jobSkills">
@@ -844,27 +781,17 @@
     </div>
 
 
-
-    <!-- MESSAGE -->
-
     <div
       id="jobMessage"
       class="job-message">
     </div>
 
 
-
-    <!-- BUTTONS -->
-
     <div class="job-actions">
 
-      <button
-        type="submit">
-
+      <button type="submit">
         📢 Publish Job
-
       </button>
-
 
       <button
         type="button"
@@ -879,7 +806,6 @@
   </form>
 
 </section>
-
 
 
 <!-- =========================
@@ -901,7 +827,6 @@
 </section>
 
 </main>
-
 
 
 <!-- =========================
@@ -926,7 +851,6 @@
 </footer>
 
 
-
 <!-- =========================
      SUPABASE
 ========================= -->
@@ -936,9 +860,9 @@
 
 <script>
 
-/* =========================
+/* =====================================================
    SUPABASE CONNECTION
-========================= */
+===================================================== */
 
 const SUPABASE_URL =
   "https://pnfyyjufupcpphzfxgim.supabase.co";
@@ -952,13 +876,12 @@ const supabaseClient =
     SUPABASE_KEY
   );
 
-
 let currentUser = null;
 
 
-/* =========================
+/* =====================================================
    MOBILE MENU
-========================= */
+===================================================== */
 
 function toggleMenu() {
 
@@ -966,17 +889,15 @@ function toggleMenu() {
     document.getElementById("navMenu");
 
   if (menu) {
-
     menu.classList.toggle("active");
-
   }
 
 }
 
 
-/* =========================
-   LOAD USER
-========================= */
+/* =====================================================
+   LOAD LOGGED-IN USER
+===================================================== */
 
 async function loadUser() {
 
@@ -985,9 +906,7 @@ async function loadUser() {
     const {
       data,
       error
-    } =
-      await supabaseClient.auth.getUser();
-
+    } = await supabaseClient.auth.getUser();
 
     if (error) {
 
@@ -1000,12 +919,7 @@ async function loadUser() {
 
     }
 
-
-    const user =
-      data.user;
-
-
-    if (!user) {
+    if (!data || !data.user) {
 
       window.location.href =
         "index.html";
@@ -1014,24 +928,18 @@ async function loadUser() {
 
     }
 
-
     currentUser =
-      user;
-
+      data.user;
 
     const name =
-      user.user_metadata?.full_name
-      ||
-      user.email
-      ||
+      currentUser.user_metadata?.full_name ||
+      currentUser.email ||
       "there";
-
 
     const userName =
       document.getElementById(
         "userName"
       );
-
 
     if (userName) {
 
@@ -1052,9 +960,9 @@ async function loadUser() {
 }
 
 
-/* =========================
+/* =====================================================
    HIDE DASHBOARD
-========================= */
+===================================================== */
 
 function hideDashboard() {
 
@@ -1067,36 +975,24 @@ function hideDashboard() {
   const bottom =
     document.querySelector(".dashboard-bottom");
 
-
   if (dashboard) {
-
-    dashboard.style.display =
-      "none";
-
+    dashboard.style.display = "none";
   }
-
 
   if (hero) {
-
-    hero.style.display =
-      "none";
-
+    hero.style.display = "none";
   }
 
-
   if (bottom) {
-
-    bottom.style.display =
-      "none";
-
+    bottom.style.display = "none";
   }
 
 }
 
 
-/* =========================
+/* =====================================================
    SHOW DASHBOARD
-========================= */
+===================================================== */
 
 function showDashboard() {
 
@@ -1109,116 +1005,101 @@ function showDashboard() {
   const bottom =
     document.querySelector(".dashboard-bottom");
 
+  const profile =
+    document.getElementById("profileSection");
+
+  const jobSection =
+    document.getElementById("jobSection");
+
+  if (profile) {
+    profile.style.display = "none";
+  }
+
+  if (jobSection) {
+    jobSection.style.display = "none";
+  }
 
   if (dashboard) {
-
-    dashboard.style.display =
-      "grid";
-
+    dashboard.style.display = "grid";
   }
-
 
   if (hero) {
-
-    hero.style.display =
-      "block";
-
+    hero.style.display = "block";
   }
 
-
   if (bottom) {
-
-    bottom.style.display =
-      "block";
-
+    bottom.style.display = "block";
   }
 
 }
 
 
-/* =========================
+/* =====================================================
    OPEN PROFILE
-========================= */
+===================================================== */
 
 async function openProfile() {
 
+  if (!currentUser) {
+
+    alert("Please wait while your account loads.");
+
+    return;
+
+  }
+
   hideDashboard();
 
+  const profile =
+    document.getElementById(
+      "profileSection"
+    );
 
   const jobSection =
     document.getElementById(
       "jobSection"
     );
 
-
-  const profile =
-    document.getElementById(
-      "profileSection"
-    );
-
-
   if (jobSection) {
-
-    jobSection.style.display =
-      "none";
-
+    jobSection.style.display = "none";
   }
-
 
   if (profile) {
 
-    profile.style.display =
-      "block";
+    profile.style.display = "block";
 
     profile.scrollIntoView({
-      behavior: "smooth"
+      behavior: "smooth",
+      block: "start"
     });
 
   }
-
 
   await loadProfile();
 
 }
 
 
-/* =========================
+/* =====================================================
    CLOSE PROFILE
-========================= */
+===================================================== */
 
 function closeProfile() {
-
-  const profile =
-    document.getElementById(
-      "profileSection"
-    );
-
-
-  if (profile) {
-
-    profile.style.display =
-      "none";
-
-  }
-
 
   showDashboard();
 
 }
 
 
-/* =========================
+/* =====================================================
    LOAD PROFILE
-========================= */
+===================================================== */
 
 async function loadProfile() {
 
   if (!currentUser) {
-
     return;
-
   }
-
 
   try {
 
@@ -1235,7 +1116,6 @@ async function loadProfile() {
         )
         .maybeSingle();
 
-
     if (error) {
 
       console.error(
@@ -1247,66 +1127,54 @@ async function loadProfile() {
 
     }
 
-
     if (!data) {
-
       return;
-
     }
 
+    const fields = {
 
-    document.getElementById(
-      "profileFullName"
-    ).value =
-      data.full_name || "";
+      profileFullName:
+        data.full_name,
 
+      profilePhone:
+        data.phone,
 
-    document.getElementById(
-      "profilePhone"
-    ).value =
-      data.phone || "";
+      profileLocation:
+        data.location,
 
+      profileRole:
+        data.role,
 
-    document.getElementById(
-      "profileLocation"
-    ).value =
-      data.location || "";
+      profileSkills:
+        data.skills,
 
+      profileEducation:
+        data.education,
 
-    document.getElementById(
-      "profileRole"
-    ).value =
-      data.role || "job_seeker";
+      profileExperience:
+        data.experience,
 
+      profileSalary:
+        data.expected_salary,
 
-    document.getElementById(
-      "profileSkills"
-    ).value =
-      data.skills || "";
+      profileBio:
+        data.bio
 
+    };
 
-    document.getElementById(
-      "profileEducation"
-    ).value =
-      data.education || "";
+    Object.keys(fields).forEach(function(id) {
 
+      const element =
+        document.getElementById(id);
 
-    document.getElementById(
-      "profileExperience"
-    ).value =
-      data.experience || "";
+      if (element) {
 
+        element.value =
+          fields[id] ?? "";
 
-    document.getElementById(
-      "profileSalary"
-    ).value =
-      data.expected_salary || "";
+      }
 
-
-    document.getElementById(
-      "profileBio"
-    ).value =
-      data.bio || "";
+    });
 
   } catch (error) {
 
@@ -1320,160 +1188,667 @@ async function loadProfile() {
 }
 
 
-/* =========================
+/* =====================================================
    SAVE PROFILE
-========================= */
+===================================================== */
 
-document
-  .getElementById("profileForm")
-  .addEventListener(
-    "submit",
-    async function(event) {
+async function saveProfile(event) {
 
-      event.preventDefault();
+  event.preventDefault();
 
+  if (!currentUser) {
 
-      if (!currentUser) {
+    alert(
+      "You are not logged in."
+    );
 
-        alert(
-          "You are not logged in."
+    return;
+
+  }
+
+  const message =
+    document.getElementById(
+      "profileMessage"
+    );
+
+  if (message) {
+
+    message.style.display =
+      "block";
+
+    message.textContent =
+      "Saving profile...";
+
+  }
+
+  const salaryValue =
+    document.getElementById(
+      "profileSalary"
+    )?.value;
+
+  const profileData = {
+
+    id:
+      currentUser.id,
+
+    full_name:
+      document.getElementById(
+        "profileFullName"
+      )?.value.trim() || "",
+
+    phone:
+      document.getElementById(
+        "profilePhone"
+      )?.value.trim() || "",
+
+    location:
+      document.getElementById(
+        "profileLocation"
+      )?.value.trim() || "",
+
+    role:
+      document.getElementById(
+        "profileRole"
+      )?.value || "job_seeker",
+
+    skills:
+      document.getElementById(
+        "profileSkills"
+      )?.value.trim() || "",
+
+    education:
+      document.getElementById(
+        "profileEducation"
+      )?.value.trim() || "",
+
+    experience:
+      document.getElementById(
+        "profileExperience"
+      )?.value.trim() || "",
+
+    expected_salary:
+      salaryValue
+        ? Number(salaryValue)
+        : null,
+
+    bio:
+      document.getElementById(
+        "profileBio"
+      )?.value.trim() || ""
+
+  };
+
+  try {
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("profiles")
+        .upsert(
+          profileData,
+          {
+            onConflict: "id"
+          }
         );
 
-        return;
+    if (error) {
+
+      console.error(
+        "Save profile error:",
+        error
+      );
+
+      if (message) {
+
+        message.textContent =
+          "❌ Could not save profile: " +
+          error.message;
 
       }
 
-
-      const message =
-        document.getElementById(
-          "profileMessage"
-        );
-
-
-      message.style.display =
-        "block";
-
-
-      message.textContent =
-        "Saving profile...";
-
-
-      const salaryValue =
-        document.getElementById(
-          "profileSalary"
-        ).value;
-
-
-      const profileData = {
-
-        id:
-          currentUser.id,
-
-        full_name:
-          document.getElementById(
-            "profileFullName"
-          ).value.trim(),
-
-        phone:
-          document.getElementById(
-            "profilePhone"
-          ).value.trim(),
-
-        location:
-          document.getElementById(
-            "profileLocation"
-          ).value.trim(),
-
-        role:
-          document.getElementById(
-            "profileRole"
-          ).value,
-
-        skills:
-          document.getElementById(
-            "profileSkills"
-          ).value.trim(),
-
-        education:
-          document.getElementById(
-            "profileEducation"
-          ).value.trim(),
-
-        experience:
-          document.getElementById(
-            "profileExperience"
-          ).value.trim(),
-
-        expected_salary:
-          salaryValue
-            ? Number(salaryValue)
-            : null,
-
-        bio:
-          document.getElementById(
-            "profileBio"
-          ).value.trim()
-
-      };
-
-
-      try {
-
-        const {
-          error
-        } =
-          await supabaseClient
-            .from("profiles")
-            .upsert(
-              profileData,
-              {
-                onConflict: "id"
-              }
-            );
-
-
-        if (error) {
-
-          console.error(
-            "Save profile error:",
-            error.message
-          );
-
-
-          message.textContent =
-            "Could not save profile: " +
-            error.message;
-
-          return;
-
-        }
-
-
-        message.textContent =
-          "✅ Profile saved successfully!";
-
-
-        document.getElementById(
-          "userName"
-        ).textContent =
-          profileData.full_name
-          ||
-          currentUser.email
-          ||
-          "there";
-
-
-      } catch (error) {
-
-        console.error(
-          "Save error:",
-          error
-        );
-
-
-        message.textContent =
-          "Something went wrong while saving.";
-
-      }
+      return;
 
     }
+
+    if (message) {
+
+      message.textContent =
+        "✅ Profile saved successfully!";
+
+    }
+
+    const userName =
+      document.getElementById(
+        "userName"
+      );
+
+    if (userName) {
+
+      userName.textContent =
+        profileData.full_name ||
+        currentUser.email ||
+        "there";
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Save error:",
+      error
+    );
+
+    if (message) {
+
+      message.textContent =
+        "❌ Something went wrong while saving.";
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   OPEN POST JOB
+===================================================== */
+
+async function openJobForm() {
+
+  if (!currentUser) {
+
+    alert(
+      "Please wait while your account loads."
+    );
+
+    return;
+
+  }
+
+  hideDashboard();
+
+  const profile =
+    document.getElementById(
+      "profileSection"
+    );
+
+  const jobSection =
+    document.getElementById(
+      "jobSection"
+    );
+
+  const jobForm =
+    document.getElementById(
+      "jobForm"
+    );
+
+  const jobMessage =
+    document.getElementById(
+      "jobMessage"
+    );
+
+  if (profile) {
+    profile.style.display = "none";
+  }
+
+  if (jobSection) {
+
+    jobSection.style.display =
+      "block";
+
+    jobSection.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }
+
+  if (jobForm) {
+    jobForm.style.display = "grid";
+  }
+
+  if (jobMessage) {
+    jobMessage.style.display = "none";
+  }
+
+  /*
+     Check employer profile.
+  */
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("employers")
+        .select(
+          "id, company_name, verified"
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+    if (error) {
+
+      console.error(
+        "Employer check error:",
+        error
+      );
+
+      showJobMessage(
+        "❌ Could not check employer profile: " +
+        error.message
+      );
+
+      return;
+
+    }
+
+    if (!data) {
+
+      if (jobForm) {
+        jobForm.style.display = "none";
+      }
+
+      showJobMessage(
+        "⚠️ You need to create an employer profile before you can post a job."
+      );
+
+      return;
+
+    }
+
+    if (jobForm) {
+      jobForm.style.display = "grid";
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Employer check error:",
+      error
+    );
+
+    showJobMessage(
+      "❌ Something went wrong checking your employer profile."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CLOSE POST JOB
+===================================================== */
+
+function closeJobForm() {
+
+  showDashboard();
+
+}
+
+
+/* =====================================================
+   SHOW JOB MESSAGE
+===================================================== */
+
+function showJobMessage(text) {
+
+  const message =
+    document.getElementById(
+      "jobMessage"
+    );
+
+  if (!message) {
+    return;
+  }
+
+  message.style.display =
+    "block";
+
+  message.textContent =
+    text;
+
+}
+
+
+/* =====================================================
+   POST JOB
+===================================================== */
+
+async function postJob(event) {
+
+  event.preventDefault();
+
+  if (!currentUser) {
+
+    showJobMessage(
+      "❌ You are not logged in."
+    );
+
+    return;
+
+  }
+
+  const message =
+    document.getElementById(
+      "jobMessage"
+    );
+
+  if (message) {
+
+    message.style.display =
+      "block";
+
+    message.textContent =
+      "Publishing job...";
+
+  }
+
+  try {
+
+    /*
+       Find employer profile.
+    */
+
+    const {
+      data: employer,
+      error: employerError
+    } =
+      await supabaseClient
+        .from("employers")
+        .select("id")
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+    if (employerError) {
+
+      showJobMessage(
+        "❌ Could not find employer profile: " +
+        employerError.message
+      );
+
+      return;
+
+    }
+
+    if (!employer) {
+
+      showJobMessage(
+        "⚠️ Create your employer profile first."
+      );
+
+      return;
+
+    }
+
+    /*
+       Get salary values.
+    */
+
+    const salaryMin =
+      document.getElementById(
+        "salaryMin"
+      )?.value;
+
+    const salaryMax =
+      document.getElementById(
+        "salaryMax"
+      )?.value;
+
+
+    /*
+       Build job.
+    */
+
+    const jobData = {
+
+      employer_id:
+        employer.id,
+
+      title:
+        document.getElementById(
+          "jobTitle"
+        )?.value.trim(),
+
+      description:
+        document.getElementById(
+          "jobDescription"
+        )?.value.trim(),
+
+      job_type:
+        document.getElementById(
+          "jobType"
+        )?.value,
+
+      location:
+        document.getElementById(
+          "jobLocation"
+        )?.value.trim(),
+
+      salary_min:
+        salaryMin
+          ? Number(salaryMin)
+          : null,
+
+      salary_max:
+        salaryMax
+          ? Number(salaryMax)
+          : null,
+
+      skills:
+        document.getElementById(
+          "jobSkills"
+        )?.value.trim() || "",
+
+      status:
+        "open"
+
+    };
+
+
+    /*
+       Insert into jobs.
+    */
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("jobs")
+        .insert(jobData)
+        .select()
+        .single();
+
+
+    if (error) {
+
+      console.error(
+        "Job posting error:",
+        error
+      );
+
+      showJobMessage(
+        "❌ Could not post job: " +
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    console.log(
+      "Job created:",
+      data
+    );
+
+
+    showJobMessage(
+      "✅ Job posted successfully!"
+    );
+
+
+    const form =
+      document.getElementById(
+        "jobForm"
+      );
+
+    if (form) {
+      form.reset();
+    }
+
+
+  } catch (error) {
+
+    console.error(
+      "Post job error:",
+      error
+    );
+
+    showJobMessage(
+      "❌ Something went wrong while posting the job."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   FIND JOBS
+===================================================== */
+
+function openFindJobs() {
+
+  alert(
+    "🔎 Find Jobs is coming soon. We're building the job marketplace!"
+  );
+
+}
+
+
+/* =====================================================
+   OTHER FEATURES
+===================================================== */
+
+function comingSoon(feature) {
+
+  alert(
+    feature +
+    " is coming soon. We're building it!"
+  );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+async function logout() {
+
+  try {
+
+    const {
+      error
+    } =
+      await supabaseClient.auth.signOut();
+
+    if (error) {
+
+      alert(
+        "❌ Logout failed: " +
+        error.message
+      );
+
+      return;
+
+    }
+
+    currentUser =
+      null;
+
+    window.location.href =
+      "index.html";
+
+  } catch (error) {
+
+    console.error(
+      "Logout error:",
+      error
+    );
+
+    alert(
+      "❌ Something went wrong while logging out."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   CONNECT FORMS
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    const profileForm =
+      document.getElementById(
+        "profileForm"
+      );
+
+    if (profileForm) {
+
+      profileForm.addEventListener(
+        "submit",
+        saveProfile
+      );
+
+    }
+
+
+    const jobForm =
+      document.getElementById(
+        "jobForm"
+      );
+
+    if (jobForm) {
+
+      jobForm.addEventListener(
+        "submit",
+        postJob
+      );
+
+    }
+
+
+    /*
+       Start dashboard after
+       everything has loaded.
+    */
+
+    loadUser();
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>

@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
+
+    /* =========================
+       DASHBOARD
+    ========================= */
+
     .dashboard-hero {
       padding: 50px 20px 30px;
       text-align: center;
@@ -19,8 +24,6 @@
     .dashboard-hero h1 {
       margin: 10px 0;
     }
-
-    /* CLEAN LOGOUT BUTTON */
 
     .dashboard-logout {
       margin-top: 18px;
@@ -56,7 +59,8 @@
     }
 
     .dashboard-card button,
-    .profile-form button {
+    .profile-form button,
+    .job-form button {
       border: none;
       padding: 12px 18px;
       border-radius: 8px;
@@ -64,9 +68,13 @@
       font-size: 15px;
     }
 
-    /* PROFILE */
 
-    #profileSection {
+    /* =========================
+       PROFILE + JOB SECTIONS
+    ========================= */
+
+    #profileSection,
+    #jobSection {
       display: none;
 
       width: 92%;
@@ -83,16 +91,19 @@
       box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
     }
 
-    #profileSection h2 {
+    #profileSection h2,
+    #jobSection h2 {
       margin-top: 0;
     }
 
-    .profile-form {
+    .profile-form,
+    .job-form {
       display: grid;
       gap: 15px;
     }
 
-    .profile-form label {
+    .profile-form label,
+    .job-form label {
       display: block;
       margin-bottom: 6px;
       font-weight: 600;
@@ -100,7 +111,12 @@
 
     .profile-form input,
     .profile-form textarea,
-    .profile-form select {
+    .profile-form select,
+
+    .job-form input,
+    .job-form textarea,
+    .job-form select {
+
       width: 100%;
       box-sizing: border-box;
 
@@ -113,24 +129,28 @@
       font-size: 15px;
     }
 
-    .profile-form textarea {
+    .profile-form textarea,
+    .job-form textarea {
       min-height: 100px;
       resize: vertical;
     }
 
-    .profile-actions {
+    .profile-actions,
+    .job-actions {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    .profile-message {
+    .profile-message,
+    .job-message {
       padding: 10px;
       border-radius: 8px;
       display: none;
     }
 
-    .close-profile {
+    .close-profile,
+    .close-job {
       margin-bottom: 15px;
       cursor: pointer;
 
@@ -140,7 +160,23 @@
 
       font-size: 16px;
     }
+
+    .salary-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 600px) {
+
+      .salary-row {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
   </style>
+
 </head>
 
 
@@ -217,9 +253,14 @@
   </p>
 
   <h1>
+
     Welcome,
-    <span id="userName">there</span>
+    <span id="userName">
+      there
+    </span>
+
     👋
+
   </h1>
 
   <p>
@@ -227,8 +268,6 @@
     discover opportunities.
   </p>
 
-
-  <!-- VISIBLE LOGOUT BUTTON -->
 
   <button
     type="button"
@@ -413,7 +452,7 @@
 
     <button
       type="button"
-      onclick="comingSoon('Post a Job')">
+      onclick="openJobForm()">
 
       Post a Job
 
@@ -457,8 +496,6 @@
     class="profile-form">
 
 
-    <!-- FULL NAME -->
-
     <div>
 
       <label for="profileFullName">
@@ -472,9 +509,6 @@
 
     </div>
 
-
-
-    <!-- PHONE -->
 
     <div>
 
@@ -490,9 +524,6 @@
     </div>
 
 
-
-    <!-- LOCATION -->
-
     <div>
 
       <label for="profileLocation">
@@ -506,9 +537,6 @@
 
     </div>
 
-
-
-    <!-- ROLE -->
 
     <div>
 
@@ -535,9 +563,6 @@
     </div>
 
 
-
-    <!-- SKILLS -->
-
     <div>
 
       <label for="profileSkills">
@@ -550,9 +575,6 @@
 
     </div>
 
-
-
-    <!-- EDUCATION -->
 
     <div>
 
@@ -567,9 +589,6 @@
     </div>
 
 
-
-    <!-- EXPERIENCE -->
-
     <div>
 
       <label for="profileExperience">
@@ -582,9 +601,6 @@
 
     </div>
 
-
-
-    <!-- EXPECTED SALARY -->
 
     <div>
 
@@ -601,9 +617,6 @@
     </div>
 
 
-
-    <!-- BIO -->
-
     <div>
 
       <label for="profileBio">
@@ -617,22 +630,15 @@
     </div>
 
 
-
-    <!-- MESSAGE -->
-
     <div
       id="profileMessage"
       class="profile-message">
     </div>
 
 
-
-    <!-- BUTTONS -->
-
     <div class="profile-actions">
 
-      <button
-        type="submit">
+      <button type="submit">
 
         💾 Save Profile
 
@@ -656,6 +662,227 @@
 
 
 <!-- =========================
+     POST JOB SECTION
+========================= -->
+
+<section id="jobSection">
+
+  <button
+    class="close-job"
+    type="button"
+    onclick="closeJobForm()">
+
+    ← Back to Dashboard
+
+  </button>
+
+
+  <h2>
+    💼 Post a Job
+  </h2>
+
+
+  <p>
+    Create a job listing and let workers
+    discover your opportunity.
+  </p>
+
+
+  <form
+    id="jobForm"
+    class="job-form">
+
+
+    <!-- JOB TITLE -->
+
+    <div>
+
+      <label for="jobTitle">
+        Job Title
+      </label>
+
+      <input
+        id="jobTitle"
+        type="text"
+        placeholder="e.g. Graphic Designer"
+        required>
+
+    </div>
+
+
+
+    <!-- DESCRIPTION -->
+
+    <div>
+
+      <label for="jobDescription">
+        Job Description
+      </label>
+
+      <textarea
+        id="jobDescription"
+        placeholder="Describe the job, responsibilities and requirements..."
+        required></textarea>
+
+    </div>
+
+
+
+    <!-- JOB TYPE -->
+
+    <div>
+
+      <label for="jobType">
+        Job Type
+      </label>
+
+      <select
+        id="jobType"
+        required>
+
+        <option value="">
+          Select job type
+        </option>
+
+        <option value="full_time">
+          Full Time
+        </option>
+
+        <option value="part_time">
+          Part Time
+        </option>
+
+        <option value="contract">
+          Contract
+        </option>
+
+        <option value="temporary">
+          Temporary
+        </option>
+
+        <option value="internship">
+          Internship
+        </option>
+
+        <option value="freelance">
+          Freelance
+        </option>
+
+      </select>
+
+    </div>
+
+
+
+    <!-- LOCATION -->
+
+    <div>
+
+      <label for="jobLocation">
+        Location
+      </label>
+
+      <input
+        id="jobLocation"
+        type="text"
+        placeholder="e.g. Accra, Ghana"
+        required>
+
+    </div>
+
+
+
+    <!-- SALARY -->
+
+    <div class="salary-row">
+
+      <div>
+
+        <label for="salaryMin">
+          Minimum Salary
+        </label>
+
+        <input
+          id="salaryMin"
+          type="number"
+          min="0"
+          placeholder="e.g. 2000">
+
+      </div>
+
+
+      <div>
+
+        <label for="salaryMax">
+          Maximum Salary
+        </label>
+
+        <input
+          id="salaryMax"
+          type="number"
+          min="0"
+          placeholder="e.g. 3500">
+
+      </div>
+
+    </div>
+
+
+
+    <!-- SKILLS -->
+
+    <div>
+
+      <label for="jobSkills">
+        Required Skills
+      </label>
+
+      <textarea
+        id="jobSkills"
+        placeholder="e.g. Photoshop, Communication, Microsoft Office"></textarea>
+
+    </div>
+
+
+
+    <!-- MESSAGE -->
+
+    <div
+      id="jobMessage"
+      class="job-message">
+    </div>
+
+
+
+    <!-- BUTTONS -->
+
+    <div class="job-actions">
+
+      <button
+        type="submit">
+
+        📢 Publish Job
+
+      </button>
+
+
+      <button
+        type="button"
+        onclick="closeJobForm()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </form>
+
+</section>
+
+
+
+<!-- =========================
      BOTTOM
 ========================= -->
 
@@ -664,7 +891,6 @@
   <h2>
     More features coming soon 🚀
   </h2>
-
 
   <p>
     WorkHub will bring jobs, workers,
@@ -702,11 +928,10 @@
 
 
 <!-- =========================
-     SUPABASE LIBRARY
+     SUPABASE
 ========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 
 <script>
@@ -731,7 +956,6 @@ const supabaseClient =
 let currentUser = null;
 
 
-
 /* =========================
    MOBILE MENU
 ========================= */
@@ -750,9 +974,8 @@ function toggleMenu() {
 }
 
 
-
 /* =========================
-   LOAD LOGGED-IN USER
+   LOAD USER
 ========================= */
 
 async function loadUser() {
@@ -817,7 +1040,6 @@ async function loadUser() {
 
     }
 
-
   } catch (error) {
 
     console.error(
@@ -830,32 +1052,20 @@ async function loadUser() {
 }
 
 
-
 /* =========================
-   OPEN PROFILE
+   HIDE DASHBOARD
 ========================= */
 
-async function openProfile() {
+function hideDashboard() {
 
   const dashboard =
-    document.querySelector(
-      ".dashboard"
-    );
+    document.querySelector(".dashboard");
 
   const hero =
-    document.querySelector(
-      ".dashboard-hero"
-    );
+    document.querySelector(".dashboard-hero");
 
   const bottom =
-    document.querySelector(
-      ".dashboard-bottom"
-    );
-
-  const profile =
-    document.getElementById(
-      "profileSection"
-    );
+    document.querySelector(".dashboard-bottom");
 
 
   if (dashboard) {
@@ -881,50 +1091,23 @@ async function openProfile() {
 
   }
 
-
-  if (profile) {
-
-    profile.style.display =
-      "block";
-
-    profile.scrollIntoView({
-      behavior: "smooth"
-    });
-
-  }
-
-
-  await loadProfile();
-
 }
 
 
-
 /* =========================
-   CLOSE PROFILE
+   SHOW DASHBOARD
 ========================= */
 
-function closeProfile() {
+function showDashboard() {
 
   const dashboard =
-    document.querySelector(
-      ".dashboard"
-    );
+    document.querySelector(".dashboard");
 
   const hero =
-    document.querySelector(
-      ".dashboard-hero"
-    );
+    document.querySelector(".dashboard-hero");
 
   const bottom =
-    document.querySelector(
-      ".dashboard-bottom"
-    );
-
-  const profile =
-    document.getElementById(
-      "profileSection"
-    );
+    document.querySelector(".dashboard-bottom");
 
 
   if (dashboard) {
@@ -950,6 +1133,66 @@ function closeProfile() {
 
   }
 
+}
+
+
+/* =========================
+   OPEN PROFILE
+========================= */
+
+async function openProfile() {
+
+  hideDashboard();
+
+
+  const jobSection =
+    document.getElementById(
+      "jobSection"
+    );
+
+
+  const profile =
+    document.getElementById(
+      "profileSection"
+    );
+
+
+  if (jobSection) {
+
+    jobSection.style.display =
+      "none";
+
+  }
+
+
+  if (profile) {
+
+    profile.style.display =
+      "block";
+
+    profile.scrollIntoView({
+      behavior: "smooth"
+    });
+
+  }
+
+
+  await loadProfile();
+
+}
+
+
+/* =========================
+   CLOSE PROFILE
+========================= */
+
+function closeProfile() {
+
+  const profile =
+    document.getElementById(
+      "profileSection"
+    );
+
 
   if (profile) {
 
@@ -958,12 +1201,14 @@ function closeProfile() {
 
   }
 
+
+  showDashboard();
+
 }
 
 
-
 /* =========================
-   LOAD EXISTING PROFILE
+   LOAD PROFILE
 ========================= */
 
 async function loadProfile() {
@@ -1063,7 +1308,6 @@ async function loadProfile() {
     ).value =
       data.bio || "";
 
-
   } catch (error) {
 
     console.error(
@@ -1074,7 +1318,6 @@ async function loadProfile() {
   }
 
 }
-
 
 
 /* =========================
@@ -1234,77 +1477,3 @@ document
       }
 
     }
-  );
-
-
-
-/* =========================
-   COMING SOON
-========================= */
-
-function comingSoon(feature) {
-
-  alert(
-    feature +
-    " is coming soon. We're building it!"
-  );
-
-}
-
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-async function logout() {
-
-  try {
-
-    const {
-      error
-    } =
-      await supabaseClient.auth.signOut();
-
-
-    if (error) {
-
-      alert(
-        "Logout failed: " +
-        error.message
-      );
-
-      return;
-
-    }
-
-
-    window.location.href =
-      "index.html";
-
-
-  } catch (error) {
-
-    console.error(
-      "Logout error:",
-      error
-    );
-
-  }
-
-}
-
-
-
-/* =========================
-   START DASHBOARD
-========================= */
-
-loadUser();
-
-</script>
-
-
-</body>
-
-  </html>

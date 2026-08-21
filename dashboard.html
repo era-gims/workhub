@@ -19,6 +19,10 @@
 
   <style>
 
+    /* =========================
+       DASHBOARD
+    ========================= */
+
     .dashboard-hero {
       padding: 50px 20px 30px;
       text-align: center;
@@ -74,9 +78,16 @@
       font-size: 15px;
     }
 
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
     #profileSection,
     #jobSection,
-    #jobsSection {
+    #jobsSection,
+    #comingSoonSection {
+
       display: none;
 
       width: 92%;
@@ -94,24 +105,86 @@
         0 5px 25px rgba(0, 0, 0, 0.08);
     }
 
+
     #profileSection h2,
     #jobSection h2,
-    #jobsSection h2 {
+    #jobsSection h2,
+    #comingSoonSection h2 {
+
       margin-top: 0;
+
     }
+
+
+    /* =========================
+       BACK BUTTON
+    ========================= */
+
+    .page-back-button {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      margin-bottom: 20px;
+
+      padding: 10px 15px;
+
+      border: 1px solid #ddd;
+
+      background: #f8f8f8;
+
+      color: #333;
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      font-size: 15px;
+
+      font-weight: 600;
+
+      transition: 0.2s;
+
+    }
+
+
+    .page-back-button:hover {
+
+      background: #eeeeee;
+
+      transform: translateX(-2px);
+
+    }
+
+
+    /* =========================
+       FORMS
+    ========================= */
 
     .profile-form,
     .job-form {
+
       display: grid;
+
       gap: 15px;
+
     }
+
 
     .profile-form label,
     .job-form label {
+
       display: block;
+
       margin-bottom: 6px;
+
       font-weight: 600;
+
     }
+
 
     .profile-form input,
     .profile-form textarea,
@@ -121,6 +194,7 @@
     .job-form select {
 
       width: 100%;
+
       box-sizing: border-box;
 
       padding: 12px;
@@ -130,81 +204,179 @@
       border-radius: 8px;
 
       font-size: 15px;
+
     }
+
 
     .profile-form textarea,
     .job-form textarea {
+
       min-height: 100px;
+
       resize: vertical;
+
     }
+
 
     .profile-actions,
     .job-actions {
+
       display: flex;
+
       gap: 10px;
+
       flex-wrap: wrap;
+
     }
+
 
     .profile-message,
     .job-message {
+
       padding: 10px;
+
       border-radius: 8px;
+
       display: none;
+
       margin: 10px 0;
+
     }
 
-    .close-profile,
-    .close-job,
-    .close-jobs {
-      margin-bottom: 15px;
-      cursor: pointer;
-
-      border: none;
-      background: transparent;
-
-      font-size: 16px;
-    }
 
     .salary-row {
+
       display: grid;
+
       grid-template-columns: 1fr 1fr;
+
       gap: 15px;
+
     }
+
+
+    /* =========================
+       JOB CARDS
+    ========================= */
 
     .job-card {
+
       border: 1px solid #e5e5e5;
+
       border-radius: 12px;
+
       padding: 20px;
+
       margin-bottom: 15px;
+
     }
+
 
     .job-card h3 {
+
       margin-top: 0;
+
     }
+
 
     .job-meta {
+
       color: #555;
+
       margin: 6px 0;
+
     }
+
 
     .job-status {
+
       display: inline-block;
+
       padding: 5px 10px;
+
       border-radius: 20px;
+
       font-size: 13px;
+
       background: #e8f7f2;
+
     }
 
+
     .no-jobs {
+
       text-align: center;
+
       padding: 30px 10px;
+
       color: #666;
+
     }
+
+
+    /* =========================
+       COMING SOON
+    ========================= */
+
+    .coming-soon-icon {
+
+      font-size: 55px;
+
+      margin-bottom: 15px;
+
+    }
+
+
+    .coming-soon-actions {
+
+      display: flex;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin-top: 20px;
+
+    }
+
+
+    .coming-soon-actions button {
+
+      border: none;
+
+      padding: 12px 18px;
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      font-size: 15px;
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 600px) {
 
       .salary-row {
+
         grid-template-columns: 1fr;
+
+      }
+
+
+      #profileSection,
+      #jobSection,
+      #jobsSection,
+      #comingSoonSection {
+
+        width: 88%;
+
+        padding: 20px;
+
       }
 
     }
@@ -217,11 +389,18 @@
 <body>
 
 
+<!-- =========================
+     NAVBAR
+========================= -->
+
 <header class="navbar">
 
   <div class="logo">
+
     Work<span>Hub</span>
+
   </div>
+
 
   <button
     class="menu-btn"
@@ -235,25 +414,32 @@
 
   <nav id="navMenu">
 
-    <a href="index.html">
+    <a
+      href="#dashboard"
+      onclick="goDashboard(); return false;">
+
       Home
+
     </a>
 
+
     <a
-      href="#"
+      href="#profile"
       onclick="openProfile(); return false;">
 
       My Profile
 
     </a>
 
+
     <a
-      href="#"
+      href="#jobs"
       onclick="openJobs(); return false;">
 
       Find Jobs
 
     </a>
+
 
     <button
       type="button"
@@ -272,30 +458,41 @@
 <main>
 
 
-<!-- DASHBOARD -->
+<!-- =========================
+     DASHBOARD
+========================= -->
 
 <section
   class="dashboard-hero"
   id="dashboardHero">
 
   <p class="welcome">
+
     WORKHUB DASHBOARD
+
   </p>
+
 
   <h1>
 
     Welcome,
+
     <span id="userName">
+
       there
+
     </span>
 
     👋
 
   </h1>
 
+
   <p>
+
     Manage your WorkHub account and
     discover opportunities.
+
   </p>
 
 
@@ -322,17 +519,26 @@
   <div class="dashboard-card">
 
     <div class="dashboard-icon">
+
       👤
+
     </div>
 
+
     <h2>
+
       My Profile
+
     </h2>
 
+
     <p>
+
       Create and manage your professional
       profile.
+
     </p>
+
 
     <button
       type="button"
@@ -351,17 +557,26 @@
   <div class="dashboard-card">
 
     <div class="dashboard-icon">
+
       🔎
+
     </div>
 
+
     <h2>
+
       Find Jobs
+
     </h2>
 
+
     <p>
+
       Search for jobs and employment
       opportunities.
+
     </p>
+
 
     <button
       type="button"
@@ -380,16 +595,25 @@
   <div class="dashboard-card">
 
     <div class="dashboard-icon">
+
       📄
+
     </div>
 
+
     <h2>
+
       My Applications
+
     </h2>
 
+
     <p>
+
       Track jobs you have applied for.
+
     </p>
+
 
     <button
       type="button"
@@ -408,17 +632,26 @@
   <div class="dashboard-card">
 
     <div class="dashboard-icon">
+
       ⭐
+
     </div>
 
+
     <h2>
+
       Saved Jobs
+
     </h2>
 
+
     <p>
+
       Keep interesting opportunities
       for later.
+
     </p>
+
 
     <button
       type="button"
@@ -437,17 +670,26 @@
   <div class="dashboard-card">
 
     <div class="dashboard-icon">
+
       🛠️
+
     </div>
 
+
     <h2>
+
       My Services
+
     </h2>
 
+
     <p>
+
       Offer your skills and services
       to customers.
+
     </p>
+
 
     <button
       type="button"
@@ -466,17 +708,26 @@
   <div class="dashboard-card">
 
     <div class="dashboard-icon">
+
       💼
+
     </div>
 
+
     <h2>
+
       Post a Job
+
     </h2>
 
+
     <p>
+
       Create a job listing and let workers
       discover your opportunity.
+
     </p>
+
 
     <button
       type="button"
@@ -492,14 +743,17 @@
 
 
 
-<!-- PROFILE -->
+<!-- =========================
+     PROFILE PAGE
+========================= -->
 
 <section id="profileSection">
 
+
   <button
-    class="close-profile"
+    class="page-back-button"
     type="button"
-    onclick="closeProfile()">
+    onclick="goBackToDashboard()">
 
     ← Back to Dashboard
 
@@ -507,12 +761,17 @@
 
 
   <h2>
+
     👤 My Profile
+
   </h2>
 
+
   <p>
+
     Complete your profile so employers
     can understand your skills and experience.
+
   </p>
 
 
@@ -524,8 +783,11 @@
     <div>
 
       <label for="profileFullName">
+
         Full Name
+
       </label>
+
 
       <input
         id="profileFullName"
@@ -535,11 +797,15 @@
     </div>
 
 
+
     <div>
 
       <label for="profilePhone">
+
         Phone
+
       </label>
+
 
       <input
         id="profilePhone"
@@ -549,11 +815,15 @@
     </div>
 
 
+
     <div>
 
       <label for="profileLocation">
+
         Location
+
       </label>
+
 
       <input
         id="profileLocation"
@@ -563,24 +833,36 @@
     </div>
 
 
+
     <div>
 
       <label for="profileRole">
+
         I am
+
       </label>
+
 
       <select id="profileRole">
 
         <option value="job_seeker">
+
           Job Seeker
+
         </option>
+
 
         <option value="employer">
+
           Employer
+
         </option>
 
+
         <option value="both">
+
           Both Job Seeker & Employer
+
         </option>
 
       </select>
@@ -588,11 +870,15 @@
     </div>
 
 
+
     <div>
 
       <label for="profileSkills">
+
         Skills
+
       </label>
+
 
       <textarea
         id="profileSkills"
@@ -601,11 +887,15 @@
     </div>
 
 
+
     <div>
 
       <label for="profileEducation">
+
         Education
+
       </label>
+
 
       <textarea
         id="profileEducation"
@@ -614,11 +904,15 @@
     </div>
 
 
+
     <div>
 
       <label for="profileExperience">
+
         Experience
+
       </label>
+
 
       <textarea
         id="profileExperience"
@@ -627,11 +921,15 @@
     </div>
 
 
+
     <div>
 
       <label for="profileSalary">
+
         Expected Salary / Rate
+
       </label>
+
 
       <input
         id="profileSalary"
@@ -642,11 +940,15 @@
     </div>
 
 
+
     <div>
 
       <label for="profileBio">
+
         About Me
+
       </label>
+
 
       <textarea
         id="profileBio"
@@ -655,21 +957,26 @@
     </div>
 
 
+
     <div
       id="profileMessage"
       class="profile-message">
     </div>
 
 
+
     <div class="profile-actions">
 
       <button type="submit">
+
         💾 Save Profile
+
       </button>
+
 
       <button
         type="button"
-        onclick="closeProfile()">
+        onclick="goBackToDashboard()">
 
         Cancel
 
@@ -683,14 +990,17 @@
 
 
 
-<!-- POST JOB -->
+<!-- =========================
+     POST JOB PAGE
+========================= -->
 
 <section id="jobSection">
 
+
   <button
-    class="close-job"
+    class="page-back-button"
     type="button"
-    onclick="closeJobForm()">
+    onclick="goBackToDashboard()">
 
     ← Back to Dashboard
 
@@ -698,19 +1008,26 @@
 
 
   <h2>
+
     💼 Post a Job
+
   </h2>
 
+
   <p>
+
     Create a job listing and let workers
     discover your opportunity.
+
   </p>
+
 
 
   <div
     id="jobMessage"
     class="job-message">
   </div>
+
 
 
   <form
@@ -721,8 +1038,11 @@
     <div>
 
       <label for="jobTitle">
+
         Job Title
+
       </label>
+
 
       <input
         id="jobTitle"
@@ -733,11 +1053,15 @@
     </div>
 
 
+
     <div>
 
       <label for="jobDescription">
+
         Job Description
+
       </label>
+
 
       <textarea
         id="jobDescription"
@@ -747,42 +1071,66 @@
     </div>
 
 
+
     <div>
 
       <label for="jobType">
+
         Job Type
+
       </label>
+
 
       <select
         id="jobType"
         required>
 
         <option value="">
+
           Select job type
+
         </option>
+
 
         <option value="full_time">
+
           Full Time
+
         </option>
+
 
         <option value="part_time">
+
           Part Time
+
         </option>
+
 
         <option value="contract">
+
           Contract
+
         </option>
+
 
         <option value="temporary">
+
           Temporary
+
         </option>
+
 
         <option value="internship">
+
           Internship
+
         </option>
 
+
         <option value="freelance">
+
           Freelance
+
         </option>
 
       </select>
@@ -790,11 +1138,15 @@
     </div>
 
 
+
     <div>
 
       <label for="jobLocation">
+
         Location
+
       </label>
+
 
       <input
         id="jobLocation"
@@ -805,13 +1157,17 @@
     </div>
 
 
+
     <div class="salary-row">
 
       <div>
 
         <label for="salaryMin">
+
           Minimum Salary
+
         </label>
+
 
         <input
           id="salaryMin"
@@ -822,11 +1178,15 @@
       </div>
 
 
+
       <div>
 
         <label for="salaryMax">
+
           Maximum Salary
+
         </label>
+
 
         <input
           id="salaryMax"
@@ -839,11 +1199,15 @@
     </div>
 
 
+
     <div>
 
       <label for="jobSkills">
+
         Required Skills
+
       </label>
+
 
       <textarea
         id="jobSkills"
@@ -852,15 +1216,19 @@
     </div>
 
 
+
     <div class="job-actions">
 
       <button type="submit">
+
         📢 Publish Job
+
       </button>
+
 
       <button
         type="button"
-        onclick="closeJobForm()">
+        onclick="goBackToDashboard()">
 
         Cancel
 
@@ -874,14 +1242,17 @@
 
 
 
-<!-- FIND JOBS -->
+<!-- =========================
+     FIND JOBS PAGE
+========================= -->
 
 <section id="jobsSection">
 
+
   <button
-    class="close-jobs"
+    class="page-back-button"
     type="button"
-    onclick="closeJobs()">
+    onclick="goBackToDashboard()">
 
     ← Back to Dashboard
 
@@ -889,18 +1260,25 @@
 
 
   <h2>
+
     🔎 Find Jobs
+
   </h2>
 
+
   <p>
+
     Browse available jobs posted by employers.
+
   </p>
 
 
   <div id="jobsList">
 
     <div class="no-jobs">
+
       Loading jobs...
+
     </div>
 
   </div>
@@ -909,16 +1287,80 @@
 
 
 
+<!-- =========================
+     COMING SOON PAGE
+========================= -->
+
+<section id="comingSoonSection">
+
+
+  <button
+    class="page-back-button"
+    type="button"
+    onclick="goBackToDashboard()">
+
+    ← Back to Dashboard
+
+  </button>
+
+
+  <div class="coming-soon-icon">
+
+    🚀
+
+  </div>
+
+
+  <h2 id="comingSoonTitle">
+
+    Coming Soon
+
+  </h2>
+
+
+  <p id="comingSoonText">
+
+    We're building this feature
+    for WorkHub.
+
+  </p>
+
+
+  <div class="coming-soon-actions">
+
+    <button
+      type="button"
+      onclick="goBackToDashboard()">
+
+      🏠 Back to Dashboard
+
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     DASHBOARD BOTTOM
+========================= -->
+
 <section class="dashboard-bottom">
 
   <h2>
+
     More features coming soon 🚀
+
   </h2>
 
+
   <p>
+
     WorkHub will bring jobs, workers,
     gigs, services and more together
     in one platform.
+
   </p>
 
 </section>
@@ -927,19 +1369,31 @@
 
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
   <div class="logo">
+
     Work<span>Hub</span>
+
   </div>
 
+
   <p>
+
     Find work. Find workers.
     Get things done.
+
   </p>
 
+
   <p class="copyright">
+
     © 2026 WorkHub
+
   </p>
 
 </footer>
@@ -963,8 +1417,10 @@ document.addEventListener(
     const SUPABASE_URL =
       "https://pnfyyjufupcpphzfxgim.supabase.co";
 
+
     const SUPABASE_KEY =
       "sb_publishable_dfSstSml6StUx2BuFG0XBA_NnxKrQ_P";
+
 
     const supabaseClient =
       window.supabase.createClient(
@@ -986,6 +1442,7 @@ document.addEventListener(
       const menu =
         document.getElementById("navMenu");
 
+
       if (menu) {
 
         menu.classList.toggle("active");
@@ -993,6 +1450,22 @@ document.addEventListener(
       }
 
     };
+
+
+
+    function closeMobileMenu() {
+
+      const menu =
+        document.getElementById("navMenu");
+
+
+      if (menu) {
+
+        menu.classList.remove("active");
+
+      }
+
+    }
 
 
 
@@ -1055,6 +1528,14 @@ document.addEventListener(
           name;
 
 
+        /*
+          If the page was opened with a hash,
+          restore that page.
+        */
+
+        handleHashNavigation();
+
+
       } catch (error) {
 
         console.error(
@@ -1069,27 +1550,46 @@ document.addEventListener(
 
 
     /* =========================
-       HIDE DASHBOARD
+       HIDE ALL PAGES
     ========================= */
 
-    function hideDashboard() {
+    function hideAllPages() {
 
-      document.getElementById(
-        "dashboardCards"
-      ).style.display =
-        "none";
+      const pages = [
+
+        "dashboardHero",
+        "dashboardCards",
+        "profileSection",
+        "jobSection",
+        "jobsSection",
+        "comingSoonSection"
+
+      ];
 
 
-      document.getElementById(
-        "dashboardHero"
-      ).style.display =
-        "none";
+      pages.forEach(
+        function(id) {
+
+          const element =
+            document.getElementById(id);
+
+
+          if (element) {
+
+            element.style.display =
+              "none";
+
+          }
+
+        }
+      );
 
 
       const bottom =
         document.querySelector(
           ".dashboard-bottom"
         );
+
 
       if (bottom) {
 
@@ -1108,10 +1608,7 @@ document.addEventListener(
 
     function showDashboard() {
 
-      document.getElementById(
-        "dashboardCards"
-      ).style.display =
-        "grid";
+      hideAllPages();
 
 
       document.getElementById(
@@ -1120,10 +1617,17 @@ document.addEventListener(
         "block";
 
 
+      document.getElementById(
+        "dashboardCards"
+      ).style.display =
+        "grid";
+
+
       const bottom =
         document.querySelector(
           ".dashboard-bottom"
         );
+
 
       if (bottom) {
 
@@ -1133,48 +1637,78 @@ document.addEventListener(
       }
 
 
-      document.getElementById(
-        "profileSection"
-      ).style.display =
-        "none";
+      window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+      });
 
 
-      document.getElementById(
-        "jobSection"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "jobsSection"
-      ).style.display =
-        "none";
+      closeMobileMenu();
 
     }
 
 
 
     /* =========================
-       OPEN PROFILE
+       NAVIGATION SYSTEM
     ========================= */
 
-    window.openProfile =
-      async function() {
+    function navigateTo(page) {
 
-        hideDashboard();
+      /*
+        Update the URL without reloading.
+      */
+
+      const newHash =
+        page === "dashboard"
+          ? "#dashboard"
+          : "#" + page;
 
 
-        document.getElementById(
-          "jobSection"
-        ).style.display =
-          "none";
+      if (
+        window.location.hash !==
+        newHash
+      ) {
+
+        history.pushState(
+          {
+            page: page
+          },
+          "",
+          newHash
+        );
+
+      }
 
 
-        document.getElementById(
-          "jobsSection"
-        ).style.display =
-          "none";
+      displayPage(page);
 
+    }
+
+
+
+    function displayPage(page) {
+
+      hideAllPages();
+
+
+      closeMobileMenu();
+
+
+      if (page === "dashboard") {
+
+        showDashboard();
+
+        return;
+
+      }
+
+
+
+      if (page === "profile") {
 
         const profile =
           document.getElementById(
@@ -1191,7 +1725,200 @@ document.addEventListener(
         });
 
 
-        await loadProfile();
+        loadProfile();
+
+        return;
+
+      }
+
+
+
+      if (page === "jobs") {
+
+        const jobs =
+          document.getElementById(
+            "jobsSection"
+          );
+
+
+        jobs.style.display =
+          "block";
+
+
+        jobs.scrollIntoView({
+          behavior: "smooth"
+        });
+
+
+        loadJobs();
+
+        return;
+
+      }
+
+
+
+      if (page === "post-job") {
+
+        const jobSection =
+          document.getElementById(
+            "jobSection"
+          );
+
+
+        jobSection.style.display =
+          "block";
+
+
+        jobSection.scrollIntoView({
+          behavior: "smooth"
+        });
+
+
+        checkEmployerProfile();
+
+        return;
+
+      }
+
+
+
+      if (page === "coming-soon") {
+
+        const section =
+          document.getElementById(
+            "comingSoonSection"
+          );
+
+
+        section.style.display =
+          "block";
+
+
+        section.scrollIntoView({
+          behavior: "smooth"
+        });
+
+        return;
+
+      }
+
+
+      showDashboard();
+
+    }
+
+
+
+    function handleHashNavigation() {
+
+      const hash =
+        window.location.hash
+          .replace("#", "");
+
+
+      if (!hash || hash === "dashboard") {
+
+        displayPage("dashboard");
+
+        return;
+
+      }
+
+
+      if (
+        hash === "profile" ||
+        hash === "jobs" ||
+        hash === "post-job" ||
+        hash === "coming-soon"
+      ) {
+
+        displayPage(hash);
+
+        return;
+
+      }
+
+
+      displayPage("dashboard");
+
+    }
+
+
+
+    /*
+      Browser Back / Forward buttons.
+    */
+
+    window.addEventListener(
+      "popstate",
+      function() {
+
+        handleHashNavigation();
+
+      }
+    );
+
+
+    window.addEventListener(
+      "hashchange",
+      function() {
+
+        handleHashNavigation();
+
+      }
+    );
+
+
+
+    /* =========================
+       DASHBOARD NAVIGATION
+    ========================= */
+
+    window.goDashboard =
+      function() {
+
+        navigateTo("dashboard");
+
+      };
+
+
+
+    window.goBackToDashboard =
+      function() {
+
+        /*
+          If there is browser history from
+          another WorkHub page, go back.
+          Otherwise go directly to dashboard.
+        */
+
+        if (
+          window.history.length > 1 &&
+          window.location.hash !==
+          "#dashboard"
+        ) {
+
+          history.back();
+
+        } else {
+
+          navigateTo("dashboard");
+
+        }
+
+      };
+
+
+
+    /* =========================
+       OPEN PROFILE
+    ========================= */
+
+    window.openProfile =
+      function() {
+
+        navigateTo("profile");
 
       };
 
@@ -1204,7 +1931,7 @@ document.addEventListener(
     window.closeProfile =
       function() {
 
-        showDashboard();
+        goBackToDashboard();
 
       };
 
@@ -1310,7 +2037,6 @@ document.addEventListener(
           "profileBio"
         ).value =
           data.bio || "";
-
 
       } catch (error) {
 
@@ -1439,9 +2165,11 @@ document.addEventListener(
               "❌ Could not save profile: " +
               result.error.message;
 
+
             console.error(
               result.error
             );
+
 
             return;
 
@@ -1471,7 +2199,7 @@ document.addEventListener(
     ========================= */
 
     window.openJobForm =
-      async function() {
+      function() {
 
         if (!currentUser) {
 
@@ -1484,59 +2212,43 @@ document.addEventListener(
         }
 
 
-        hideDashboard();
+        navigateTo("post-job");
+
+      };
 
 
+
+    /* =========================
+       CHECK EMPLOYER PROFILE
+    ========================= */
+
+    async function checkEmployerProfile() {
+
+      const jobForm =
         document.getElementById(
-          "profileSection"
-        ).style.display =
-          "none";
+          "jobForm"
+        );
 
 
+      const message =
         document.getElementById(
-          "jobsSection"
-        ).style.display =
-          "none";
+          "jobMessage"
+        );
 
 
-        const jobSection =
-          document.getElementById(
-            "jobSection"
-          );
+      jobForm.style.display =
+        "grid";
 
 
-        jobSection.style.display =
-          "block";
+      message.style.display =
+        "block";
 
 
-        jobSection.scrollIntoView({
-          behavior: "smooth"
-        });
+      message.textContent =
+        "Checking employer profile...";
 
 
-        const jobForm =
-          document.getElementById(
-            "jobForm"
-          );
-
-
-        const message =
-          document.getElementById(
-            "jobMessage"
-          );
-
-
-        message.style.display =
-          "block";
-
-
-        message.textContent =
-          "Checking employer profile...";
-
-
-        /*
-          Find the employer profile.
-        */
+      try {
 
         const {
           data,
@@ -1591,10 +2303,6 @@ document.addEventListener(
         }
 
 
-        /*
-          Employer exists.
-        */
-
         jobForm.style.display =
           "grid";
 
@@ -1602,7 +2310,26 @@ document.addEventListener(
         message.style.display =
           "none";
 
-      };
+
+      } catch (error) {
+
+        console.error(
+          "Employer check error:",
+          error
+        );
+
+
+        message.textContent =
+          "❌ Something went wrong: " +
+          error.message;
+
+
+        jobForm.style.display =
+          "none";
+
+      }
+
+    }
 
 
 
@@ -1613,7 +2340,7 @@ document.addEventListener(
     window.closeJobForm =
       function() {
 
-        showDashboard();
+        goBackToDashboard();
 
       };
 
@@ -1658,10 +2385,6 @@ document.addEventListener(
 
 
           try {
-
-            /*
-              Find employer ID.
-            */
 
             const {
               data: employer,
@@ -1756,10 +2479,6 @@ document.addEventListener(
             };
 
 
-            /*
-              Insert into jobs table.
-            */
-
             const {
               data,
               error
@@ -1827,39 +2546,20 @@ document.addEventListener(
     ========================= */
 
     window.openJobs =
-      async function() {
+      function() {
 
-        hideDashboard();
+        if (!currentUser) {
 
-
-        document.getElementById(
-          "profileSection"
-        ).style.display =
-          "none";
-
-
-        document.getElementById(
-          "jobSection"
-        ).style.display =
-          "none";
-
-
-        const jobsSection =
-          document.getElementById(
-            "jobsSection"
+          alert(
+            "You are not logged in."
           );
 
+          return;
 
-        jobsSection.style.display =
-          "block";
-
-
-        jobsSection.scrollIntoView({
-          behavior: "smooth"
-        });
+        }
 
 
-        await loadJobs();
+        navigateTo("jobs");
 
       };
 
@@ -1872,7 +2572,7 @@ document.addEventListener(
     window.closeJobs =
       function() {
 
-        showDashboard();
+        goBackToDashboard();
 
       };
 
@@ -1965,45 +2665,88 @@ document.addEventListener(
             const salaryText =
               job.salary_min != null ||
               job.salary_max != null
+
                 ? "💰 " +
-                  (job.salary_min != null
-                    ? job.salary_min
-                    : "—") +
+
+                  (
+                    job.salary_min != null
+                      ? job.salary_min
+                      : "—"
+                  ) +
+
                   " - " +
-                  (job.salary_max != null
-                    ? job.salary_max
-                    : "—")
+
+                  (
+                    job.salary_max != null
+                      ? job.salary_max
+                      : "—"
+                  )
+
                 : "💰 Salary not specified";
 
 
             card.innerHTML =
 
               "<h3>" +
-              escapeHtml(job.title) +
+
+              escapeHtml(
+                job.title
+              ) +
+
               "</h3>" +
 
+
               "<p class='job-meta'>📍 " +
-              escapeHtml(job.location || "Location not specified") +
+
+              escapeHtml(
+                job.location ||
+                "Location not specified"
+              ) +
+
               "</p>" +
+
 
               "<p class='job-meta'>💼 " +
-              escapeHtml(job.job_type || "") +
+
+              escapeHtml(
+                job.job_type || ""
+              ) +
+
               "</p>" +
+
 
               "<p class='job-meta'>" +
+
               salaryText +
+
               "</p>" +
+
 
               "<p>" +
-              escapeHtml(job.description || "") +
+
+              escapeHtml(
+                job.description || ""
+              ) +
+
               "</p>" +
+
 
               "<p><strong>Skills:</strong> " +
-              escapeHtml(job.skills || "Not specified") +
+
+              escapeHtml(
+                job.skills ||
+                "Not specified"
+              ) +
+
               "</p>" +
 
+
               "<span class='job-status'>" +
-              escapeHtml(job.status || "open") +
+
+              escapeHtml(
+                job.status || "open"
+              ) +
+
               "</span>";
 
 
@@ -2063,10 +2806,20 @@ document.addEventListener(
     window.comingSoon =
       function(feature) {
 
-        alert(
+        document.getElementById(
+          "comingSoonTitle"
+        ).textContent =
+          feature;
+
+
+        document.getElementById(
+          "comingSoonText"
+        ).textContent =
           feature +
-          " is coming soon. We're building it!"
-        );
+          " is coming soon. We're building it for WorkHub!";
+
+
+        navigateTo("coming-soon");
 
       };
 

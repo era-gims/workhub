@@ -2687,67 +2687,58 @@ document.addEventListener(
 
             card.innerHTML =
 
-              "<h3>" +
+  "<h3>" +
+  escapeHtml(job.title) +
+  "</h3>" +
 
-              escapeHtml(
-                job.title
-              ) +
+  "<p class='job-meta'>📍 " +
+  escapeHtml(
+    job.location || "Location not specified"
+  ) +
+  "</p>" +
 
-              "</h3>" +
+  "<p class='job-meta'>💼 " +
+  escapeHtml(
+    job.job_type || "Job type not specified"
+  ) +
+  "</p>" +
 
+  "<p class='job-meta'>" +
+  salaryText +
+  "</p>" +
 
-              "<p class='job-meta'>📍 " +
+  "<p>" +
+  escapeHtml(
+    job.description || ""
+  ) +
+  "</p>" +
 
-              escapeHtml(
-                job.location ||
-                "Location not specified"
-              ) +
+  "<p><strong>Skills:</strong> " +
+  escapeHtml(
+    job.skills || "Not specified"
+  ) +
+  "</p>" +
 
-              "</p>" +
+  "<span class='job-status'>" +
+  escapeHtml(
+    job.status || "open"
+  ) +
+  "</span>" +
 
+  "<div style='margin-top:15px;'>" +
 
-              "<p class='job-meta'>💼 " +
+  "<button " +
+  "type='button' " +
+  "class='apply-job-button' " +
+  "onclick='openApplicationForm(" +
+  job.id +
+  ")'>" +
 
-              escapeHtml(
-                job.job_type || ""
-              ) +
+  "📩 Apply Now" +
 
-              "</p>" +
+  "</button>" +
 
-
-              "<p class='job-meta'>" +
-
-              salaryText +
-
-              "</p>" +
-
-
-              "<p>" +
-
-              escapeHtml(
-                job.description || ""
-              ) +
-
-              "</p>" +
-
-
-              "<p><strong>Skills:</strong> " +
-
-              escapeHtml(
-                job.skills ||
-                "Not specified"
-              ) +
-
-              "</p>" +
-
-
-              "<span class='job-status'>" +
-
-              escapeHtml(
-                job.status || "open"
-              ) +
-
-              "</span>";
+  "</div>";
 
 
             jobsList.appendChild(
@@ -2773,6 +2764,416 @@ document.addEventListener(
 
     }
 
+    /* =========================
+   JOB APPLICATION
+========================= */
+
+window.openApplicationForm =
+  function(jobId) {
+
+    if (!currentUser) {
+
+      alert(
+        "You are not logged in."
+      );
+
+      return;
+
+    }
+
+
+    const existingForm =
+      document.getElementById(
+        "applicationFormContainer"
+      );
+
+
+    if (existingForm) {
+
+      existingForm.remove();
+
+    }
+
+
+    const container =
+      document.createElement(
+        "div"
+      );
+
+
+    container.id =
+      "applicationFormContainer";
+
+
+    container.style.position =
+      "fixed";
+
+    container.style.top =
+      "0";
+
+    container.style.left =
+      "0";
+
+    container.style.width =
+      "100%";
+
+    container.style.height =
+      "100%";
+
+    container.style.background =
+      "rgba(0,0,0,0.5)";
+
+    container.style.display =
+      "flex";
+
+    container.style.alignItems =
+      "center";
+
+    container.style.justifyContent =
+      "center";
+
+    container.style.zIndex =
+      "9999";
+
+    container.style.padding =
+      "20px";
+
+    container.style.boxSizing =
+      "border-box";
+
+
+    container.innerHTML =
+
+      "<div style='" +
+
+      "background:white;" +
+
+      "width:100%;" +
+
+      "max-width:600px;" +
+
+      "max-height:90vh;" +
+
+      "overflow-y:auto;" +
+
+      "padding:25px;" +
+
+      "border-radius:15px;" +
+
+      "box-shadow:0 10px 40px rgba(0,0,0,0.2);" +
+
+      "'>" +
+
+      "<button " +
+
+      "type='button' " +
+
+      "id='closeApplicationButton' " +
+
+      "style='" +
+
+      "float:right;" +
+
+      "border:none;" +
+
+      "background:#eee;" +
+
+      "border-radius:50%;" +
+
+      "width:35px;" +
+
+      "height:35px;" +
+
+      "font-size:18px;" +
+
+      "cursor:pointer;" +
+
+      "'>" +
+
+      "×" +
+
+      "</button>" +
+
+      "<h2>📩 Apply for Job</h2>" +
+
+      "<p>" +
+
+      "Send your application to the employer." +
+
+      "</p>" +
+
+      "<form id='applicationForm' style='display:grid;gap:15px;'>" +
+
+      "<div>" +
+
+      "<label for='coverLetter' style='display:block;margin-bottom:6px;font-weight:600;'>" +
+
+      "Cover Letter" +
+
+      "</label>" +
+
+      "<textarea " +
+
+      "id='coverLetter' " +
+
+      "required " +
+
+      "placeholder='Tell the employer why you are suitable for this job...' " +
+
+      "style='width:100%;box-sizing:border-box;padding:12px;border:1px solid #ddd;border-radius:8px;min-height:180px;resize:vertical;'>" +
+
+      "</textarea>" +
+
+      "</div>" +
+
+      "<div id='applicationMessage' style='display:none;padding:10px;border-radius:8px;'></div>" +
+
+      "<div style='display:flex;gap:10px;flex-wrap:wrap;'>" +
+
+      "<button " +
+
+      "type='submit' " +
+
+      "style='border:none;padding:12px 18px;border-radius:8px;cursor:pointer;font-size:15px;'>" +
+
+      "📤 Submit Application" +
+
+      "</button>" +
+
+      "<button " +
+
+      "type='button' " +
+
+      "id='cancelApplicationButton' " +
+
+      "style='border:none;padding:12px 18px;border-radius:8px;cursor:pointer;font-size:15px;'>" +
+
+      "Cancel" +
+
+      "</button>" +
+
+      "</div>" +
+
+      "</form>" +
+
+      "</div>";
+
+
+    document.body.appendChild(
+      container
+    );
+
+
+    document
+      .getElementById(
+        "closeApplicationButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          container.remove();
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "cancelApplicationButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          container.remove();
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "applicationForm"
+      )
+      .addEventListener(
+        "submit",
+        async function(event) {
+
+          event.preventDefault();
+
+
+          const message =
+            document.getElementById(
+              "applicationMessage"
+            );
+
+
+          const coverLetter =
+            document.getElementById(
+              "coverLetter"
+            ).value.trim();
+
+
+          if (!coverLetter) {
+
+            message.style.display =
+              "block";
+
+            message.textContent =
+              "⚠️ Please write a cover letter.";
+
+            return;
+
+          }
+
+
+          message.style.display =
+            "block";
+
+          message.textContent =
+            "Submitting application...";
+
+
+          try {
+
+            /*
+              Check whether the user
+              has already applied.
+            */
+
+            const {
+              data: existingApplication,
+              error: existingError
+            } =
+              await supabaseClient
+                .from("applications")
+                .select("id")
+                .eq(
+                  "job_id",
+                  jobId
+                )
+                .eq(
+                  "applicant_id",
+                  currentUser.id
+                )
+                .maybeSingle();
+
+
+            if (existingError) {
+
+              console.error(
+                "Application check error:",
+                existingError
+              );
+
+              message.textContent =
+                "❌ Could not check application: " +
+                existingError.message;
+
+              return;
+
+            }
+
+
+            if (existingApplication) {
+
+              message.textContent =
+                "⚠️ You have already applied for this job.";
+
+              return;
+
+            }
+
+
+            /*
+              Submit application.
+            */
+
+            const {
+              data,
+              error
+            } =
+              await supabaseClient
+                .from("applications")
+                .insert({
+
+                  job_id:
+                    jobId,
+
+                  applicant_id:
+                    currentUser.id,
+
+                  status:
+                    "pending",
+
+                  cover_letter:
+                    coverLetter
+
+                })
+                .select()
+                .single();
+
+
+            if (error) {
+
+              console.error(
+                "Application error:",
+                error
+              );
+
+              message.textContent =
+                "❌ Could not submit application: " +
+                error.message;
+
+              return;
+
+            }
+
+
+            console.log(
+              "Application submitted:",
+              data
+            );
+
+
+            message.textContent =
+              "✅ Application submitted successfully!";
+
+
+            document.getElementById(
+              "coverLetter"
+            ).value = "";
+
+
+            setTimeout(
+              function() {
+
+                container.remove();
+
+              },
+              1800
+            );
+
+
+          } catch (error) {
+
+            console.error(
+              "Submit application error:",
+              error
+            );
+
+
+            message.textContent =
+              "❌ Something went wrong: " +
+              error.message;
+
+          }
+
+        }
+      );
+
+  };
 
 
     /* =========================

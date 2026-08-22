@@ -988,7 +988,113 @@
 
 </section>
 
+  
+<!-- =========================
+     EMPLOYER PROFILE PAGE
+========================= -->
 
+<section id="employerProfileSection">
+
+  <button
+    class="page-back-button"
+    type="button"
+    onclick="goBackToDashboard()">
+
+    ← Back to Dashboard
+
+  </button>
+
+  <h2>
+    🏢 Employer Profile
+  </h2>
+
+  <p>
+    Create your business or employer profile
+    before posting jobs on WorkHub.
+  </p>
+
+  <form
+    id="employerProfileForm"
+    class="profile-form">
+
+    <div>
+
+      <label for="companyName">
+        Company / Business Name
+      </label>
+
+      <input
+        id="companyName"
+        type="text"
+        placeholder="e.g. GIMS Technologies"
+        required>
+
+    </div>
+
+    <div>
+
+      <label for="companyDescription">
+        Company Description
+      </label>
+
+      <textarea
+        id="companyDescription"
+        placeholder="Tell workers about your company or business..."
+        required></textarea>
+
+    </div>
+
+    <div>
+
+      <label for="companyLocation">
+        Location
+      </label>
+
+      <input
+        id="companyLocation"
+        type="text"
+        placeholder="e.g. Accra, Ghana"
+        required>
+
+    </div>
+
+    <div>
+
+      <label for="companyWebsite">
+        Website
+      </label>
+
+      <input
+        id="companyWebsite"
+        type="url"
+        placeholder="https://example.com">
+
+    </div>
+
+    <div
+      id="employerProfileMessage"
+      class="profile-message">
+    </div>
+
+    <div class="profile-actions">
+
+      <button type="submit">
+        💾 Save Employer Profile
+      </button>
+
+      <button
+        type="button"
+        onclick="goBackToDashboard()">
+
+        Cancel
+
+      </button>
+
+    </div>
+
+  </form>
+
+</section>
 
 <!-- =========================
      POST JOB PAGE

@@ -5,289 +5,37 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#0f766e">
   <title>WorkHub Dashboard</title>
-
   <link rel="stylesheet" href="style.css">
 
   <style>
-    :root {
-      color: #17202a;
-      font-family: Arial, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #f8fafc;
-      line-height: 1.5;
-    }
-
-    .navbar {
-      min-height: 70px;
-      padding: 0 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: #fff;
-      border-bottom: 1px solid #eee;
-    }
-
-    .logo {
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .logo span,
-    .welcome {
-      color: #0f766e;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    nav a {
-      color: inherit;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    button {
-      border: 0;
-      border-radius: 8px;
-      background: #0f766e;
-      color: #fff;
-      padding: 12px 18px;
-      font: 700 15px Arial, sans-serif;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.9;
-    }
-
-    button.secondary,
-    .page-back-button {
-      background: #f5f5f5;
-      color: #333;
-      border: 1px solid #ddd;
-    }
-
-    .menu-btn {
-      display: none;
-      padding: 5px;
-      background: transparent;
-      color: #17202a;
-      font-size: 28px;
-    }
-
-    .dashboard-hero {
-      padding: 50px 20px 30px;
-      text-align: center;
-    }
-
-    .dashboard-hero h1 {
-      margin: 10px 0;
-    }
-
-    .welcome {
-      font-weight: 800;
-      letter-spacing: 2px;
-      font-size: 13px;
-    }
-
-    .dashboard {
-      width: 92%;
-      max-width: 1100px;
-      margin: 20px auto 50px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-
-    .dashboard-card,
-    .panel {
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .dashboard-card {
-      padding: 25px;
-    }
-
-    .dashboard-icon {
-      font-size: 35px;
-      margin-bottom: 10px;
-    }
-
-    .panel {
-      display: none;
-      width: 92%;
-      max-width: 900px;
-      margin: 20px auto 50px;
-      padding: 25px;
-    }
-
-    .panel h2 {
-      margin-top: 0;
-    }
-
-    .dashboard-bottom {
-      padding: 10px 6% 50px;
-      text-align: center;
-    }
-
-    .page-back-button {
-      display: inline-flex;
-      gap: 7px;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .profile-form,
-    .job-form {
-      display: grid;
-      gap: 15px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font: 15px Arial, sans-serif;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .actions,
-    .salary-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .salary-row > * {
-      flex: 1;
-      min-width: 180px;
-    }
-
-    .message {
-      display: none;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      background: #e8f7f2;
-      color: #075a52;
-    }
-
-    .message.error {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .job-card {
-      border: 1px solid #e5e5e5;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 15px;
-    }
-
-    .job-card h3 {
-      margin-top: 0;
-    }
-
-    .job-meta {
-      color: #555;
-      margin: 6px 0;
-    }
-
-    .job-status {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 13px;
-      background: #e8f7f2;
-    }
-
-    .no-jobs {
-      text-align: center;
-      padding: 30px 10px;
-      color: #666;
-    }
-
-    footer {
-      padding: 35px 6%;
-      background: #17202a;
-      color: #fff;
-      text-align: center;
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: grid;
-      place-items: center;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    .modal-card {
-      width: min(600px, 100%);
-      max-height: 90vh;
-      overflow: auto;
-      padding: 25px;
-      border-radius: 15px;
-      background: #fff;
-    }
-
-    @media (max-width: 700px) {
-      .menu-btn {
-        display: block;
-      }
-
-      nav {
-        display: none;
-        position: absolute;
-        z-index: 10;
-        top: 70px;
-        left: 0;
-        right: 0;
-        padding: 20px 6%;
-        flex-direction: column;
-        align-items: stretch;
-        background: #fff;
-        border-bottom: 1px solid #ddd;
-      }
-
-      nav.active {
-        display: flex;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .panel {
-        width: 88%;
-        padding: 20px;
-      }
-    }
+    :root { color: #17202a; font-family: Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f8fafc; line-height: 1.5; }
+    .navbar { min-height: 70px; padding: 0 6%; display:flex; align-items:center; justify-content:space-between; background:#fff; border-bottom:1px solid #eee; }
+    .logo { font-size:25px; font-weight:800; } .logo span, .welcome { color:#0f766e; }
+    nav { display:flex; align-items:center; gap:20px; } nav a { color:inherit; text-decoration:none; font-weight:600; }
+    button { border:0; border-radius:8px; background:#0f766e; color:#fff; padding:12px 18px; font:700 15px Arial,sans-serif; cursor:pointer; }
+    button:hover { opacity:.9; } button.secondary,.page-back-button { background:#f5f5f5; color:#333; border:1px solid #ddd; }
+    .menu-btn { display:none; padding:5px; background:transparent; color:#17202a; font-size:28px; }
+    .dashboard-hero { padding:50px 20px 30px; text-align:center; } .dashboard-hero h1 { margin:10px 0; }
+    .welcome { font-weight:800; letter-spacing:2px; font-size:13px; }
+    .dashboard { width:92%; max-width:1100px; margin:20px auto 50px; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; }
+    .dashboard-card,.panel { background:#fff; border-radius:15px; box-shadow:0 5px 20px rgba(0,0,0,.08); }
+    .dashboard-card { padding:25px; } .dashboard-icon { font-size:35px; margin-bottom:10px; }
+    .panel { display:none; width:92%; max-width:900px; margin:20px auto 50px; padding:25px; }
+    .panel h2 { margin-top:0; } .dashboard-bottom { padding:10px 6% 50px; text-align:center; }
+    .page-back-button { display:inline-flex; gap:7px; align-items:center; margin-bottom:20px; }
+    .profile-form,.job-form { display:grid; gap:15px; } label { display:block; margin-bottom:6px; font-weight:600; }
+    input,textarea,select { width:100%; padding:12px; border:1px solid #ddd; border-radius:8px; font:15px Arial,sans-serif; }
+    textarea { min-height:100px; resize:vertical; } .actions,.salary-row { display:flex; gap:10px; flex-wrap:wrap; } .salary-row > * { flex:1; min-width:180px; }
+    .message { display:none; padding:10px; margin:10px 0; border-radius:8px; background:#e8f7f2; color:#075a52; }
+    .message.error { background:#fee2e2; color:#991b1b; } .job-card { border:1px solid #e5e5e5; border-radius:12px; padding:20px; margin-bottom:15px; }
+    .job-card h3 { margin-top:0; } .job-meta { color:#555; margin:6px 0; } .job-status { display:inline-block; padding:5px 10px; border-radius:20px; font-size:13px; background:#e8f7f2; }
+    .no-jobs { text-align:center; padding:30px 10px; color:#666; } footer { padding:35px 6%; background:#17202a; color:#fff; text-align:center; }
+    .modal { position:fixed; inset:0; z-index:9999; display:grid; place-items:center; padding:20px; background:rgba(0,0,0,.5); }
+    .modal-card { width:min(600px,100%); max-height:90vh; overflow:auto; padding:25px; border-radius:15px; background:#fff; }
+    @media (max-width:700px) { .menu-btn { display:block; } nav { display:none; position:absolute; z-index:10; top:70px; left:0; right:0; padding:20px 6%; flex-direction:column; align-items:stretch; background:#fff; border-bottom:1px solid #ddd; } nav.active { display:flex; } }
+    @media (max-width:600px) { .panel { width:88%; padding:20px; } }
   </style>
 </head>
 
@@ -295,11 +43,7 @@
   <header class="navbar">
     <div class="logo">Work<span>Hub</span></div>
 
-    <button
-      class="menu-btn"
-      type="button"
-      data-action="menu"
-      aria-label="Open menu">
+    <button class="menu-btn" type="button" data-action="menu" aria-label="Open menu">
       ☰
     </button>
 
@@ -307,6 +51,7 @@
       <a href="#dashboard" data-page="dashboard">Home</a>
       <a href="#profile" data-page="profile">My Profile</a>
       <a href="#jobs" data-page="jobs">Find Jobs</a>
+      <a href="#applications" data-page="applications">My Applications</a>
       <button type="button" data-action="logout">Logout</button>
     </nav>
   </header>
@@ -338,9 +83,7 @@
         <div class="dashboard-icon">📄</div>
         <h2>My Applications</h2>
         <p>Track jobs you have applied for.</p>
-        <button type="button" data-coming="My Applications">
-          View Applications
-        </button>
+        <button type="button" data-page="applications">View Applications</button>
       </article>
 
       <article class="dashboard-card">
@@ -383,20 +126,9 @@
       <p>Complete your profile so employers can understand your skills and experience.</p>
 
       <form id="profileForm" class="profile-form">
-        <div>
-          <label for="profileFullName">Full Name</label>
-          <input id="profileFullName" type="text" placeholder="Your full name">
-        </div>
-
-        <div>
-          <label for="profilePhone">Phone</label>
-          <input id="profilePhone" type="tel" placeholder="Your phone number">
-        </div>
-
-        <div>
-          <label for="profileLocation">Location</label>
-          <input id="profileLocation" type="text" placeholder="e.g. Accra, Ghana">
-        </div>
+        <div><label for="profileFullName">Full Name</label><input id="profileFullName" type="text" placeholder="Your full name"></div>
+        <div><label for="profilePhone">Phone</label><input id="profilePhone" type="tel" placeholder="Your phone number"></div>
+        <div><label for="profileLocation">Location</label><input id="profileLocation" type="text" placeholder="e.g. Accra, Ghana"></div>
 
         <div>
           <label for="profileRole">I am</label>
@@ -407,30 +139,11 @@
           </select>
         </div>
 
-        <div>
-          <label for="profileSkills">Skills</label>
-          <textarea id="profileSkills" placeholder="e.g. Graphic Design, Marketing, Plumbing"></textarea>
-        </div>
-
-        <div>
-          <label for="profileEducation">Education</label>
-          <textarea id="profileEducation" placeholder="Your education and qualifications"></textarea>
-        </div>
-
-        <div>
-          <label for="profileExperience">Experience</label>
-          <textarea id="profileExperience" placeholder="Describe your work experience"></textarea>
-        </div>
-
-        <div>
-          <label for="profileSalary">Expected Salary / Rate</label>
-          <input id="profileSalary" type="number" min="0" placeholder="e.g. 2500">
-        </div>
-
-        <div>
-          <label for="profileBio">About Me</label>
-          <textarea id="profileBio" placeholder="Tell employers about yourself"></textarea>
-        </div>
+        <div><label for="profileSkills">Skills</label><textarea id="profileSkills" placeholder="e.g. Graphic Design, Marketing, Plumbing"></textarea></div>
+        <div><label for="profileEducation">Education</label><textarea id="profileEducation" placeholder="Your education and qualifications"></textarea></div>
+        <div><label for="profileExperience">Experience</label><textarea id="profileExperience" placeholder="Describe your work experience"></textarea></div>
+        <div><label for="profileSalary">Expected Salary / Rate</label><input id="profileSalary" type="number" min="0" placeholder="e.g. 2500"></div>
+        <div><label for="profileBio">About Me</label><textarea id="profileBio" placeholder="Tell employers about yourself"></textarea></div>
 
         <div id="profileMessage" class="message"></div>
 
@@ -450,25 +163,10 @@
       <p>Create your business profile before posting jobs.</p>
 
       <form id="employerProfileForm" class="profile-form">
-        <div>
-          <label for="companyName">Company / Business Name</label>
-          <input id="companyName" required placeholder="e.g. GIMS Technologies">
-        </div>
-
-        <div>
-          <label for="companyDescription">Company Description</label>
-          <textarea id="companyDescription" required placeholder="Tell workers about your company or business..."></textarea>
-        </div>
-
-        <div>
-          <label for="companyLocation">Location</label>
-          <input id="companyLocation" required placeholder="e.g. Accra, Ghana">
-        </div>
-
-        <div>
-          <label for="companyWebsite">Website</label>
-          <input id="companyWebsite" type="url" placeholder="https://example.com">
-        </div>
+        <div><label for="companyName">Company / Business Name</label><input id="companyName" required placeholder="e.g. GIMS Technologies"></div>
+        <div><label for="companyDescription">Company Description</label><textarea id="companyDescription" required placeholder="Tell workers about your company or business..."></textarea></div>
+        <div><label for="companyLocation">Location</label><input id="companyLocation" required placeholder="e.g. Accra, Ghana"></div>
+        <div><label for="companyWebsite">Website</label><input id="companyWebsite" type="url" placeholder="https://example.com"></div>
 
         <div id="employerProfileMessage" class="message"></div>
 
@@ -490,15 +188,8 @@
       <div id="jobMessage" class="message"></div>
 
       <form id="jobForm" class="job-form">
-        <div>
-          <label for="jobTitle">Job Title</label>
-          <input id="jobTitle" required placeholder="e.g. Graphic Designer">
-        </div>
-
-        <div>
-          <label for="jobDescription">Job Description</label>
-          <textarea id="jobDescription" required placeholder="Describe the job, responsibilities and requirements..."></textarea>
-        </div>
+        <div><label for="jobTitle">Job Title</label><input id="jobTitle" required placeholder="e.g. Graphic Designer"></div>
+        <div><label for="jobDescription">Job Description</label><textarea id="jobDescription" required placeholder="Describe the job, responsibilities and requirements..."></textarea></div>
 
         <div>
           <label for="jobType">Job Type</label>
@@ -513,27 +204,14 @@
           </select>
         </div>
 
-        <div>
-          <label for="jobLocation">Location</label>
-          <input id="jobLocation" required placeholder="e.g. Accra, Ghana">
-        </div>
+        <div><label for="jobLocation">Location</label><input id="jobLocation" required placeholder="e.g. Accra, Ghana"></div>
 
         <div class="salary-row">
-          <div>
-            <label for="salaryMin">Minimum Salary</label>
-            <input id="salaryMin" type="number" min="0">
-          </div>
-
-          <div>
-            <label for="salaryMax">Maximum Salary</label>
-            <input id="salaryMax" type="number" min="0">
-          </div>
+          <div><label for="salaryMin">Minimum Salary</label><input id="salaryMin" type="number" min="0"></div>
+          <div><label for="salaryMax">Maximum Salary</label><input id="salaryMax" type="number" min="0"></div>
         </div>
 
-        <div>
-          <label for="jobSkills">Required Skills</label>
-          <textarea id="jobSkills" placeholder="e.g. Photoshop, Communication"></textarea>
-        </div>
+        <div><label for="jobSkills">Required Skills</label><textarea id="jobSkills" placeholder="e.g. Photoshop, Communication"></textarea></div>
 
         <div class="actions">
           <button type="submit">📢 Publish Job</button>
@@ -555,6 +233,19 @@
       </div>
     </section>
 
+    <section id="applicationsSection" class="panel">
+      <button class="page-back-button" type="button" data-page="dashboard">
+        ← Back to Dashboard
+      </button>
+
+      <h2>📄 My Applications</h2>
+      <p>Track the jobs you have applied for and their current status.</p>
+
+      <div id="applicationsList">
+        <div class="no-jobs">Loading applications...</div>
+      </div>
+    </section>
+
     <section id="comingSoonSection" class="panel">
       <button class="page-back-button" type="button" data-page="dashboard">
         ← Back to Dashboard
@@ -563,7 +254,6 @@
       <div class="dashboard-icon">🚀</div>
       <h2 id="comingSoonTitle">Coming Soon</h2>
       <p id="comingSoonText">We're building this feature for WorkHub.</p>
-
       <button type="button" data-page="dashboard">🏠 Back to Dashboard</button>
     </section>
 
@@ -596,6 +286,7 @@
         "employer-profile": ["employerProfileSection"],
         "post-job": ["jobSection"],
         jobs: ["jobsSection"],
+        applications: ["applicationsSection"],
         "coming-soon": ["comingSoonSection"]
       };
 
@@ -625,23 +316,16 @@
         $("navMenu").classList.remove("active");
       }
 
-      function requireUser() {
-        if (currentUser) return true;
-        alert("You are not logged in.");
-        return false;
-      }
-
       function showPage(page, updateHash = true) {
-        if (!pages[page]) {
-          page = "dashboard";
-        }
+        if (!pages[page]) page = "dashboard";
 
         Object.values(pages).flat().forEach((id) => {
           $(id).style.display = "none";
         });
 
         pages[page].forEach((id) => {
-          $(id).style.display = id === "dashboardCards" ? "grid" : "block";
+          $(id).style.display =
+            id === "dashboardCards" ? "grid" : "block";
         });
 
         closeMenu();
@@ -654,6 +338,7 @@
         if (page === "employer-profile") loadEmployerProfile();
         if (page === "post-job") checkEmployerProfile();
         if (page === "jobs") loadJobs();
+        if (page === "applications") loadApplications();
 
         window.scrollTo({
           top: 0,
@@ -663,6 +348,13 @@
 
       function navigateFromHash() {
         showPage((location.hash || "#dashboard").slice(1), false);
+      }
+
+      function requireUser() {
+        if (currentUser) return true;
+
+        alert("You are not logged in.");
+        return false;
       }
 
       async function loadUser() {
@@ -723,7 +415,7 @@
 
         const { data, error } = await supabaseClient
           .from("employers")
-          .select("company_name, description, location, website")
+          .select("company_name,description,location,website")
           .eq("user_id", currentUser.id)
           .maybeSingle();
 
@@ -769,7 +461,6 @@
             "❌ Could not check employer profile: " + error.message,
             true
           );
-
           form.style.display = "none";
         } else if (!data) {
           message(
@@ -777,40 +468,37 @@
             "⚠️ You need an employer profile before you can post a job.",
             true
           );
-
           form.style.display = "none";
         }
       }
 
       async function loadJobs() {
-        const jobsList = $("jobsList");
+        const list = $("jobsList");
 
-        jobsList.innerHTML =
+        list.innerHTML =
           '<div class="no-jobs">Loading jobs...</div>';
 
         const { data, error } = await supabaseClient
           .from("jobs")
-          .select("id, title, description, job_type, location, salary_min, salary_max, skills, status, created_at")
+          .select("id,title,description,job_type,location,salary_min,salary_max,skills,status,created_at")
           .eq("status", "open")
           .order("created_at", { ascending: false });
 
         if (error) {
-          jobsList.innerHTML =
+          list.innerHTML =
             '<div class="no-jobs">❌ Could not load jobs: ' +
             escapeHtml(error.message) +
             "</div>";
-
           return;
         }
 
         if (!data?.length) {
-          jobsList.innerHTML =
+          list.innerHTML =
             '<div class="no-jobs">No jobs have been posted yet.</div>';
-
           return;
         }
 
-        jobsList.replaceChildren();
+        list.replaceChildren();
 
         data.forEach((job) => {
           const card = document.createElement("article");
@@ -851,7 +539,122 @@
           });
 
           card.append(button);
-          jobsList.append(card);
+          list.append(card);
+        });
+      }
+
+      async function loadApplications() {
+        const list = $("applicationsList");
+
+        list.innerHTML =
+          '<div class="no-jobs">Loading applications...</div>';
+
+        const { data: applications, error } = await supabaseClient
+          .from("applications")
+          .select("id,job_id,status,cover_letter,created_at")
+          .eq("applicant_id", currentUser.id)
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          list.innerHTML =
+            '<div class="no-jobs">❌ Could not load applications: ' +
+            escapeHtml(error.message) +
+            "</div>";
+          return;
+        }
+
+        if (!applications?.length) {
+          list.innerHTML =
+            '<div class="no-jobs">You have not applied for any jobs yet.</div>';
+          return;
+        }
+
+        const ids = applications.map((application) => {
+          return application.job_id;
+        });
+
+        const { data: jobs, error: jobsError } = await supabaseClient
+          .from("jobs")
+          .select("id,title,location,job_type")
+          .in("id", ids);
+
+        if (jobsError) {
+          list.innerHTML =
+            '<div class="no-jobs">❌ Could not load job details: ' +
+            escapeHtml(jobsError.message) +
+            "</div>";
+          return;
+        }
+
+        const jobsById = new Map(
+          (jobs || []).map((job) => [job.id, job])
+        );
+
+        list.replaceChildren();
+
+        applications.forEach((application) => {
+          const job = jobsById.get(application.job_id);
+          const card = document.createElement("article");
+
+          card.className = "job-card";
+
+          const date = application.created_at
+            ? new Date(application.created_at).toLocaleDateString()
+            : "";
+
+          card.innerHTML =
+            "<h3>" +
+            escapeHtml(job?.title || "Job no longer available") +
+            "</h3>" +
+            '<p class="job-meta">📍 ' +
+            escapeHtml(job?.location || "Location not specified") +
+            "</p>" +
+            '<p class="job-meta">💼 ' +
+            escapeHtml(job?.job_type || "Job type not specified") +
+            "</p>" +
+            '<p class="job-meta">Applied: ' +
+            escapeHtml(date) +
+            "</p>" +
+            "<p><strong>Cover letter:</strong> " +
+            escapeHtml(application.cover_letter || "Not provided") +
+            "</p>" +
+            '<span class="job-status">' +
+            escapeHtml(application.status || "pending") +
+            "</span>";
+
+          const withdraw = document.createElement("button");
+
+          withdraw.type = "button";
+          withdraw.className = "secondary";
+          withdraw.textContent = "Withdraw Application";
+          withdraw.style.marginLeft = "10px";
+
+          withdraw.addEventListener("click", async () => {
+            if (!confirm("Withdraw this application?")) return;
+
+            withdraw.disabled = true;
+
+            const { error: deleteError } = await supabaseClient
+              .from("applications")
+              .delete()
+              .eq("id", application.id)
+              .eq("applicant_id", currentUser.id);
+
+            if (deleteError) {
+              alert(
+                "Could not withdraw application: " +
+                deleteError.message
+              );
+
+              withdraw.disabled = false;
+              return;
+            }
+
+            loadApplications();
+          });
+
+          card.append(withdraw);
+          list.append(card);
         });
       }
 
@@ -859,29 +662,26 @@
         if (!requireUser()) return;
 
         const modal = document.createElement("div");
+
         modal.className = "modal";
 
-        modal.innerHTML = `
-          <div class="modal-card">
-            <button type="button" class="secondary" data-close>×</button>
-            <h2>📩 Apply for Job</h2>
-            <p>Send your application to the employer.</p>
-
-            <form class="job-form">
-              <div>
-                <label>Cover Letter</label>
-                <textarea required placeholder="Tell the employer why you are suitable for this job..."></textarea>
-              </div>
-
-              <div class="message"></div>
-
-              <div class="actions">
-                <button type="submit">📤 Submit Application</button>
-                <button type="button" class="secondary" data-close>Cancel</button>
-              </div>
-            </form>
-          </div>
-        `;
+        modal.innerHTML =
+          '<div class="modal-card">' +
+          '<button type="button" class="secondary" data-close>×</button>' +
+          "<h2>📩 Apply for Job</h2>" +
+          "<p>Send your application to the employer.</p>" +
+          '<form class="job-form">' +
+          "<div>" +
+          "<label>Cover Letter</label>" +
+          '<textarea required placeholder="Tell the employer why you are suitable for this job..."></textarea>' +
+          "</div>" +
+          '<div class="message"></div>' +
+          '<div class="actions">' +
+          '<button type="submit">📤 Submit Application</button>' +
+          '<button type="button" class="secondary" data-close>Cancel</button>' +
+          "</div>" +
+          "</form>" +
+          "</div>";
 
         const close = () => modal.remove();
 
@@ -895,7 +695,7 @@
 
         const form = modal.querySelector("form");
         const note = modal.querySelector(".message");
-        const coverLetter = modal.querySelector("textarea");
+        const cover = modal.querySelector("textarea");
 
         form.addEventListener("submit", async (event) => {
           event.preventDefault();
@@ -917,7 +717,8 @@
           if (checkError) {
             note.classList.add("error");
             note.textContent =
-              "❌ Could not check application: " + checkError.message;
+              "❌ Could not check application: " +
+              checkError.message;
             return;
           }
 
@@ -934,13 +735,14 @@
               job_id: jobId,
               applicant_id: currentUser.id,
               status: "pending",
-              cover_letter: coverLetter.value.trim()
+              cover_letter: cover.value.trim()
             });
 
           if (error) {
             note.classList.add("error");
             note.textContent =
-              "❌ Could not submit application: " + error.message;
+              "❌ Could not submit application: " +
+              error.message;
             return;
           }
 
@@ -965,30 +767,30 @@
       }
 
       document.addEventListener("click", (event) => {
-        const pageButton = event.target.closest("[data-page]");
+        const page = event.target.closest("[data-page]");
 
-        if (pageButton) {
+        if (page) {
           event.preventDefault();
 
           if (
-            pageButton.dataset.page !== "dashboard" &&
+            page.dataset.page !== "dashboard" &&
             !requireUser()
           ) {
             return;
           }
 
-          showPage(pageButton.dataset.page);
+          showPage(page.dataset.page);
           return;
         }
 
-        const comingButton = event.target.closest("[data-coming]");
+        const coming = event.target.closest("[data-coming]");
 
-        if (comingButton) {
+        if (coming) {
           $("comingSoonTitle").textContent =
-            comingButton.dataset.coming;
+            coming.dataset.coming;
 
           $("comingSoonText").textContent =
-            comingButton.dataset.coming +
+            coming.dataset.coming +
             " is coming soon. We're building it for WorkHub!";
 
           showPage("coming-soon");
@@ -1013,7 +815,7 @@
 
         const salary = $("profileSalary").value;
 
-        const profileData = {
+        const row = {
           id: currentUser.id,
           full_name: $("profileFullName").value.trim(),
           phone: $("profilePhone").value.trim(),
@@ -1028,7 +830,7 @@
 
         const { error } = await supabaseClient
           .from("profiles")
-          .upsert(profileData, { onConflict: "id" });
+          .upsert(row, { onConflict: "id" });
 
         if (error) {
           message(
@@ -1040,7 +842,7 @@
         }
 
         $("userName").textContent =
-          profileData.full_name ||
+          row.full_name ||
           currentUser.email ||
           "there";
 
@@ -1062,7 +864,7 @@
             "Saving employer profile..."
           );
 
-          const employerData = {
+          const row = {
             user_id: currentUser.id,
             company_name: $("companyName").value.trim(),
             description: $("companyDescription").value.trim(),
@@ -1092,11 +894,11 @@
           const request = existing
             ? supabaseClient
                 .from("employers")
-                .update(employerData)
+                .update(row)
                 .eq("id", existing.id)
             : supabaseClient
                 .from("employers")
-                .insert(employerData);
+                .insert(row);
 
           const { error } = await request;
 
@@ -1142,8 +944,8 @@
           return;
         }
 
-        const salaryMin = $("salaryMin").value;
-        const salaryMax = $("salaryMax").value;
+        const min = $("salaryMin").value;
+        const max = $("salaryMax").value;
 
         const { error } = await supabaseClient
           .from("jobs")
@@ -1153,8 +955,8 @@
             description: $("jobDescription").value.trim(),
             job_type: $("jobType").value,
             location: $("jobLocation").value.trim(),
-            salary_min: salaryMin ? Number(salaryMin) : null,
-            salary_max: salaryMax ? Number(salaryMax) : null,
+            salary_min: min ? Number(min) : null,
+            salary_max: max ? Number(max) : null,
             skills: $("jobSkills").value.trim(),
             status: "open"
           });

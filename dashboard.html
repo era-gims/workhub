@@ -360,30 +360,20 @@
        MOBILE
     ========================= */
 
-    @media (max-width: 600px) {
-
-      .salary-row {
-
-        grid-template-columns: 1fr;
-
-      }
-
-
-      @media (max-width: 600px) {
+@media (max-width: 600px) {
+  .salary-row {
+    grid-template-columns: 1fr;
+  }
 
   #profileSection,
   #employerProfileSection,
   #jobSection,
   #jobsSection,
   #comingSoonSection {
-
-        width: 88%;
-
-        padding: 20px;
-
-      }
-
-    }
+    width: 88%;
+    padding: 20px;
+  }
+}
 
   </style>
 
@@ -705,8 +695,26 @@
 
   </div>
 
+  <!-- EMPLOYER PROFILE -->
+<div class="dashboard-card">
+  <div class="dashboard-icon">
+    🏢
+  </div>
 
+  <h2>Employer Profile</h2>
 
+  <p>
+    Create or update your business profile before posting jobs.
+  </p>
+
+  <button
+    type="button"
+    onclick="openEmployerProfile()">
+    Open Employer Profile
+  </button>
+</div>
+
+  
   <!-- POST JOB -->
 
   <div class="dashboard-card">

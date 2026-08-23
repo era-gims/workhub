@@ -84,6 +84,7 @@
     ========================= */
 
     #profileSection,
+    #employerProfileSection,
     #jobSection,
     #jobsSection,
     #comingSoonSection {
@@ -368,10 +369,13 @@
       }
 
 
-      #profileSection,
-      #jobSection,
-      #jobsSection,
-      #comingSoonSection {
+      @media (max-width: 600px) {
+
+  #profileSection,
+  #employerProfileSection,
+  #jobSection,
+  #jobsSection,
+  #comingSoonSection {
 
         width: 88%;
 
@@ -1666,6 +1670,7 @@ document.addEventListener(
         "dashboardHero",
         "dashboardCards",
         "profileSection",
+        "employerProfileSection",
         "jobSection",
         "jobsSection",
         "comingSoonSection"
@@ -1837,7 +1842,28 @@ document.addEventListener(
 
       }
 
+      if (page === "employer-profile") {
 
+        const employerProfile =
+          document.getElementById(
+            "employerProfileSection"
+          );
+        
+        
+        employerProfile.style.display =
+          "block";
+        
+        
+        employerProfile.scrollIntoView({
+          behavior: "smooth"
+        });
+        
+        
+        loadEmployerProfile();
+        
+        return;
+      
+      }
 
       if (page === "jobs") {
 
@@ -1934,10 +1960,11 @@ document.addEventListener(
 
       if (
         hash === "profile" ||
+        hash === "employer-profile" ||
         hash === "jobs" ||
         hash === "post-job" ||
         hash === "coming-soon"
-      ) {
+      )
 
         displayPage(hash);
 
@@ -2299,6 +2326,305 @@ document.addEventListener(
       );
 
 
+  /* =========================
+   EMPLOYER PROFILE
+========================= */
+
+window.openEmployerProfile =
+  function() {
+
+    if (!currentUser) {
+
+      alert(
+        "You are not logged in."
+      );
+
+      return;
+
+    }
+
+    navigateTo(
+      "employer-profile"
+    );
+
+  };
+
+
+/* =========================
+   LOAD EMPLOYER PROFILE
+========================= */
+
+async function loadEmployerProfile() {
+
+  if (!currentUser) {
+
+    return;
+
+  }
+
+  const message =
+    document.getElementById(
+      "employerProfileMessage"
+    );
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("employers")
+        .select(
+          "id, user_id, company_name, description, location, website, verified, created_at"
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (error) {
+
+      console.error(
+        "Employer profile loading error:",
+        error
+      );
+
+      message.style.display =
+        "block";
+
+      message.textContent =
+        "❌ Could not load employer profile: " +
+        error.message;
+
+      return;
+
+    }
+
+
+    if (!data) {
+
+      document.getElementById(
+        "companyName"
+      ).value = "";
+
+      document.getElementById(
+        "companyDescription"
+      ).value = "";
+
+      document.getElementById(
+        "companyLocation"
+      ).value = "";
+
+      document.getElementById(
+        "companyWebsite"
+      ).value = "";
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "companyName"
+    ).value =
+      data.company_name || "";
+
+
+    document.getElementById(
+      "companyDescription"
+    ).value =
+      data.description || "";
+
+
+    document.getElementById(
+      "companyLocation"
+    ).value =
+      data.location || "";
+
+
+    document.getElementById(
+      "companyWebsite"
+    ).value =
+      data.website || "";
+
+
+  } catch (error) {
+
+    console.error(
+      "Employer profile error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   SAVE EMPLOYER PROFILE
+========================= */
+
+document
+  .getElementById(
+    "employerProfileForm"
+  )
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      if (!currentUser) {
+
+        alert(
+          "You are not logged in."
+        );
+
+        return;
+
+      }
+
+
+      const message =
+        document.getElementById(
+          "employerProfileMessage"
+        );
+
+
+      message.style.display =
+        "block";
+
+
+      message.textContent =
+        "Saving employer profile...";
+
+
+      const employerData = {
+
+        user_id:
+          currentUser.id,
+
+        company_name:
+          document.getElementById(
+            "companyName"
+          ).value.trim(),
+
+        description:
+          document.getElementById(
+            "companyDescription"
+          ).value.trim(),
+
+        location:
+          document.getElementById(
+            "companyLocation"
+          ).value.trim(),
+
+        website:
+          document.getElementById(
+            "companyWebsite"
+          ).value.trim()
+
+      };
+
+
+      try {
+
+        const {
+          data: existing,
+          error: findError
+        } =
+          await supabaseClient
+            .from("employers")
+            .select("id")
+            .eq(
+              "user_id",
+              currentUser.id
+            )
+            .maybeSingle();
+
+
+        if (findError) {
+
+          message.textContent =
+            "❌ Could not check employer profile: " +
+            findError.message;
+
+          return;
+
+        }
+
+
+        let result;
+
+
+        if (existing) {
+
+          result =
+            await supabaseClient
+              .from("employers")
+              .update(
+                employerData
+              )
+              .eq(
+                "id",
+                existing.id
+              )
+              .select()
+              .single();
+
+        } else {
+
+          result =
+            await supabaseClient
+              .from("employers")
+              .insert(
+                employerData
+              )
+              .select()
+              .single();
+
+        }
+
+
+        if (result.error) {
+
+          console.error(
+            "Employer profile save error:",
+            result.error
+          );
+
+          message.textContent =
+            "❌ Could not save employer profile: " +
+            result.error.message;
+
+          return;
+
+        }
+
+
+        message.textContent =
+          "✅ Employer profile saved successfully!";
+
+
+      } catch (error) {
+
+        console.error(
+          "Employer profile error:",
+          error
+        );
+
+        message.textContent =
+          "❌ Something went wrong: " +
+          error.message;
+
+      }
+
+    }
+  );
 
     /* =========================
        OPEN POST JOB

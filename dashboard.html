@@ -6,7 +6,6 @@
   <meta name="theme-color" content="#0f766e">
   <title>WorkHub Dashboard</title>
   <link rel="stylesheet" href="style.css">
-
   <style>
     :root { color: #17202a; font-family: Arial, sans-serif; }
     * { box-sizing: border-box; }
@@ -31,25 +30,23 @@
     .message { display:none; padding:10px; margin:10px 0; border-radius:8px; background:#e8f7f2; color:#075a52; }
     .message.error { background:#fee2e2; color:#991b1b; } .job-card { border:1px solid #e5e5e5; border-radius:12px; padding:20px; margin-bottom:15px; }
     .job-card h3 { margin-top:0; } .job-meta { color:#555; margin:6px 0; } .job-status { display:inline-block; padding:5px 10px; border-radius:20px; font-size:13px; background:#e8f7f2; }
-    .no-jobs { text-align:center; padding:30px 10px; color:#666; } footer { padding:35px 6%; background:#17202a; color:#fff; text-align:center; }
+    .no-jobs { text-align:center; padding:30px 10px; color:#666; } .application-item { margin-top:15px; padding:16px; border:1px solid #e5e7eb; border-radius:10px; background:#f8fafc; } .application-item h4 { margin:0 0 8px; } .application-item select { max-width:220px; margin:10px 0; } footer { padding:35px 6%; background:#17202a; color:#fff; text-align:center; }
     .modal { position:fixed; inset:0; z-index:9999; display:grid; place-items:center; padding:20px; background:rgba(0,0,0,.5); }
     .modal-card { width:min(600px,100%); max-height:90vh; overflow:auto; padding:25px; border-radius:15px; background:#fff; }
     @media (max-width:700px) { .menu-btn { display:block; } nav { display:none; position:absolute; z-index:10; top:70px; left:0; right:0; padding:20px 6%; flex-direction:column; align-items:stretch; background:#fff; border-bottom:1px solid #ddd; } nav.active { display:flex; } }
     @media (max-width:600px) { .panel { width:88%; padding:20px; } }
   </style>
 </head>
-
 <body>
   <header class="navbar">
     <div class="logo">Work<span>Hub</span></div>
-
     <button class="menu-btn" type="button" data-action="menu" aria-label="Open menu">☰</button>
-
     <nav id="navMenu">
       <a href="#dashboard" data-page="dashboard">Home</a>
       <a href="#profile" data-page="profile">My Profile</a>
       <a href="#jobs" data-page="jobs">Find Jobs</a>
       <a href="#applications" data-page="applications">My Applications</a>
+      <a href="#employer-jobs" data-page="employer-jobs">Manage Jobs</a>
       <button type="button" data-action="logout">Logout</button>
     </nav>
   </header>
@@ -70,39 +67,25 @@
       <article class="dashboard-card"><div class="dashboard-icon">🛠️</div><h2>My Services</h2><p>Offer your skills and services to customers.</p><button type="button" data-coming="My Services">My Services</button></article>
       <article class="dashboard-card"><div class="dashboard-icon">🏢</div><h2>Employer Profile</h2><p>Create or update your business profile before posting jobs.</p><button type="button" data-page="employer-profile">Open Employer Profile</button></article>
       <article class="dashboard-card"><div class="dashboard-icon">💼</div><h2>Post a Job</h2><p>Create a job listing and let workers discover your opportunity.</p><button type="button" data-page="post-job">Post a Job</button></article>
+      <article class="dashboard-card"><div class="dashboard-icon">📋</div><h2>Manage Jobs</h2><p>View applicants and update their application status.</p><button type="button" data-page="employer-jobs">Manage Jobs</button></article>
     </section>
 
     <section id="profileSection" class="panel">
       <button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button>
       <h2>👤 My Profile</h2>
       <p>Complete your profile so employers can understand your skills and experience.</p>
-
       <form id="profileForm" class="profile-form">
         <div><label for="profileFullName">Full Name</label><input id="profileFullName" type="text" placeholder="Your full name"></div>
         <div><label for="profilePhone">Phone</label><input id="profilePhone" type="tel" placeholder="Your phone number"></div>
         <div><label for="profileLocation">Location</label><input id="profileLocation" type="text" placeholder="e.g. Accra, Ghana"></div>
-
-        <div>
-          <label for="profileRole">I am</label>
-          <select id="profileRole">
-            <option value="job_seeker">Job Seeker</option>
-            <option value="employer">Employer</option>
-            <option value="both">Both Job Seeker & Employer</option>
-          </select>
-        </div>
-
+        <div><label for="profileRole">I am</label><select id="profileRole"><option value="job_seeker">Job Seeker</option><option value="employer">Employer</option><option value="both">Both Job Seeker & Employer</option></select></div>
         <div><label for="profileSkills">Skills</label><textarea id="profileSkills" placeholder="e.g. Graphic Design, Marketing, Plumbing"></textarea></div>
         <div><label for="profileEducation">Education</label><textarea id="profileEducation" placeholder="Your education and qualifications"></textarea></div>
         <div><label for="profileExperience">Experience</label><textarea id="profileExperience" placeholder="Describe your work experience"></textarea></div>
         <div><label for="profileSalary">Expected Salary / Rate</label><input id="profileSalary" type="number" min="0" placeholder="e.g. 2500"></div>
         <div><label for="profileBio">About Me</label><textarea id="profileBio" placeholder="Tell employers about yourself"></textarea></div>
-
         <div id="profileMessage" class="message"></div>
-
-        <div class="actions">
-          <button type="submit">💾 Save Profile</button>
-          <button type="button" class="secondary" data-page="dashboard">Cancel</button>
-        </div>
+        <div class="actions"><button type="submit">💾 Save Profile</button><button type="button" class="secondary" data-page="dashboard">Cancel</button></div>
       </form>
     </section>
 
@@ -110,19 +93,13 @@
       <button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button>
       <h2>🏢 Employer Profile</h2>
       <p>Create your business profile before posting jobs.</p>
-
       <form id="employerProfileForm" class="profile-form">
         <div><label for="companyName">Company / Business Name</label><input id="companyName" required placeholder="e.g. GIMS Technologies"></div>
         <div><label for="companyDescription">Company Description</label><textarea id="companyDescription" required placeholder="Tell workers about your company or business..."></textarea></div>
         <div><label for="companyLocation">Location</label><input id="companyLocation" required placeholder="e.g. Accra, Ghana"></div>
         <div><label for="companyWebsite">Website</label><input id="companyWebsite" type="url" placeholder="https://example.com"></div>
-
         <div id="employerProfileMessage" class="message"></div>
-
-        <div class="actions">
-          <button type="submit">💾 Save Employer Profile</button>
-          <button type="button" class="secondary" data-page="dashboard">Cancel</button>
-        </div>
+        <div class="actions"><button type="submit">💾 Save Employer Profile</button><button type="button" class="secondary" data-page="dashboard">Cancel</button></div>
       </form>
     </section>
 
@@ -130,85 +107,34 @@
       <button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button>
       <h2>💼 Post a Job</h2>
       <p>Create a job listing and let workers discover your opportunity.</p>
-
       <div id="jobMessage" class="message"></div>
-
       <form id="jobForm" class="job-form">
         <div><label for="jobTitle">Job Title</label><input id="jobTitle" required placeholder="e.g. Graphic Designer"></div>
         <div><label for="jobDescription">Job Description</label><textarea id="jobDescription" required placeholder="Describe the job, responsibilities and requirements..."></textarea></div>
-
-        <div>
-          <label for="jobType">Job Type</label>
-          <select id="jobType" required>
-            <option value="">Select job type</option>
-            <option value="full_time">Full Time</option>
-            <option value="part_time">Part Time</option>
-            <option value="contract">Contract</option>
-            <option value="temporary">Temporary</option>
-            <option value="internship">Internship</option>
-            <option value="freelance">Freelance</option>
-          </select>
-        </div>
-
+        <div><label for="jobType">Job Type</label><select id="jobType" required><option value="">Select job type</option><option value="full_time">Full Time</option><option value="part_time">Part Time</option><option value="contract">Contract</option><option value="temporary">Temporary</option><option value="internship">Internship</option><option value="freelance">Freelance</option></select></div>
         <div><label for="jobLocation">Location</label><input id="jobLocation" required placeholder="e.g. Accra, Ghana"></div>
-
-        <div class="salary-row">
-          <div><label for="salaryMin">Minimum Salary</label><input id="salaryMin" type="number" min="0"></div>
-          <div><label for="salaryMax">Maximum Salary</label><input id="salaryMax" type="number" min="0"></div>
-        </div>
-
+        <div class="salary-row"><div><label for="salaryMin">Minimum Salary</label><input id="salaryMin" type="number" min="0"></div><div><label for="salaryMax">Maximum Salary</label><input id="salaryMax" type="number" min="0"></div></div>
         <div><label for="jobSkills">Required Skills</label><textarea id="jobSkills" placeholder="e.g. Photoshop, Communication"></textarea></div>
-
-        <div class="actions">
-          <button type="submit">📢 Publish Job</button>
-          <button type="button" class="secondary" data-page="dashboard">Cancel</button>
-        </div>
+        <div class="actions"><button type="submit">📢 Publish Job</button><button type="button" class="secondary" data-page="dashboard">Cancel</button></div>
       </form>
     </section>
 
-    <section id="jobsSection" class="panel">
-      <button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button>
-      <h2>🔎 Find Jobs</h2>
-      <p>Browse available jobs posted by employers.</p>
-      <div id="jobsList"><div class="no-jobs">Loading jobs...</div></div>
-    </section>
-
-    <section id="applicationsSection" class="panel">
-      <button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button>
-      <h2>📄 My Applications</h2>
-      <p>Track the jobs you have applied for and their current status.</p>
-      <div id="applicationsList"><div class="no-jobs">Loading applications...</div></div>
-    </section>
-
-    <section id="comingSoonSection" class="panel">
-      <button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button>
-      <div class="dashboard-icon">🚀</div>
-      <h2 id="comingSoonTitle">Coming Soon</h2>
-      <p id="comingSoonText">We're building this feature for WorkHub.</p>
-      <button type="button" data-page="dashboard">🏠 Back to Dashboard</button>
-    </section>
-
-    <section id="dashboardBottom" class="dashboard-bottom">
-      <h2>More features coming soon 🚀</h2>
-      <p>WorkHub will bring jobs, workers, gigs, services and more together in one platform.</p>
-    </section>
+    <section id="jobsSection" class="panel"><button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button><h2>🔎 Find Jobs</h2><p>Browse available jobs posted by employers.</p><div id="jobsList"><div class="no-jobs">Loading jobs...</div></div></section>
+    <section id="applicationsSection" class="panel"><button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button><h2>📄 My Applications</h2><p>Track the jobs you have applied for and their current status.</p><div id="applicationsList"><div class="no-jobs">Loading applications...</div></div></section>
+    <section id="employerJobsSection" class="panel"><button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button><h2>📋 Manage Jobs & Applicants</h2><p>Review applications for jobs posted by your business.</p><div id="employerJobsMessage" class="message"></div><div id="employerJobsList"><div class="no-jobs">Loading your jobs...</div></div></section>
+    <section id="comingSoonSection" class="panel"><button class="page-back-button" type="button" data-page="dashboard">← Back to Dashboard</button><div class="dashboard-icon">🚀</div><h2 id="comingSoonTitle">Coming Soon</h2><p id="comingSoonText">We're building this feature for WorkHub.</p><button type="button" data-page="dashboard">🏠 Back to Dashboard</button></section>
+    <section id="dashboardBottom" class="dashboard-bottom"><h2>More features coming soon 🚀</h2><p>WorkHub will bring jobs, workers, gigs, services and more together in one platform.</p></section>
   </main>
 
-  <footer>
-    <div class="logo">Work<span>Hub</span></div>
-    <p>Find work. Find workers. Get things done.</p>
-    <p>© 2026 WorkHub</p>
-  </footer>
+  <footer><div class="logo">Work<span>Hub</span></div><p>Find work. Find workers. Get things done.</p><p>© 2026 WorkHub</p></footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script>
     (() => {
       "use strict";
 
       const SUPABASE_URL = "https://pnfyyjufupcpphzfxgim.supabase.co";
       const SUPABASE_KEY = "sb_publishable_dfSstSml6StUx2BuFG0XBA_NnxKrQ_P";
-
       const $ = (id) => document.getElementById(id);
 
       const pages = {
@@ -218,6 +144,7 @@
         "post-job": ["jobSection"],
         jobs: ["jobsSection"],
         applications: ["applicationsSection"],
+        "employer-jobs": ["employerJobsSection"],
         "coming-soon": ["comingSoonSection"]
       };
 
@@ -255,8 +182,7 @@
         });
 
         pages[page].forEach((id) => {
-          $(id).style.display =
-            id === "dashboardCards" ? "grid" : "block";
+          $(id).style.display = id === "dashboardCards" ? "grid" : "block";
         });
 
         closeMenu();
@@ -270,11 +196,9 @@
         if (page === "post-job") checkEmployerProfile();
         if (page === "jobs") loadJobs();
         if (page === "applications") loadApplications();
+        if (page === "employer-jobs") loadEmployerJobs();
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       function navigateFromHash() {
@@ -299,7 +223,6 @@
         }
 
         currentUser = user;
-
         $("userName").textContent =
           user.user_metadata?.full_name ||
           user.email ||
@@ -332,9 +255,7 @@
         };
 
         Object.entries(fields).forEach(([id, key]) => {
-          $(id).value =
-            data[key] ??
-            (id === "profileRole" ? "job_seeker" : "");
+          $(id).value = data[key] ?? (id === "profileRole" ? "job_seeker" : "");
         });
       }
 
@@ -350,18 +271,12 @@
           .maybeSingle();
 
         if (error) {
-          message(
-            "employerProfileMessage",
-            "❌ Could not load employer profile: " + error.message,
-            true
-          );
+          message("employerProfileMessage", "❌ Could not load employer profile: " + error.message, true);
           return;
         }
 
         ["companyName", "companyDescription", "companyLocation", "companyWebsite"]
-          .forEach((id) => {
-            $(id).value = "";
-          });
+          .forEach((id) => { $(id).value = ""; });
 
         if (data) {
           $("companyName").value = data.company_name || "";
@@ -386,27 +301,17 @@
           .maybeSingle();
 
         if (error) {
-          message(
-            "jobMessage",
-            "❌ Could not check employer profile: " + error.message,
-            true
-          );
+          message("jobMessage", "❌ Could not check employer profile: " + error.message, true);
           form.style.display = "none";
         } else if (!data) {
-          message(
-            "jobMessage",
-            "⚠️ You need an employer profile before you can post a job.",
-            true
-          );
+          message("jobMessage", "⚠️ You need an employer profile before you can post a job.", true);
           form.style.display = "none";
         }
       }
 
       async function loadJobs() {
         const list = $("jobsList");
-
-        list.innerHTML =
-          '<div class="no-jobs">Loading jobs...</div>';
+        list.innerHTML = '<div class="no-jobs">Loading jobs...</div>';
 
         const { data, error } = await supabaseClient
           .from("jobs")
@@ -415,16 +320,12 @@
           .order("created_at", { ascending: false });
 
         if (error) {
-          list.innerHTML =
-            '<div class="no-jobs">❌ Could not load jobs: ' +
-            escapeHtml(error.message) +
-            "</div>";
+          list.innerHTML = '<div class="no-jobs">❌ Could not load jobs: ' + escapeHtml(error.message) + "</div>";
           return;
         }
 
         if (!data?.length) {
-          list.innerHTML =
-            '<div class="no-jobs">No jobs have been posted yet.</div>';
+          list.innerHTML = '<div class="no-jobs">No jobs have been posted yet.</div>';
           return;
         }
 
@@ -436,32 +337,21 @@
 
           const salary =
             job.salary_min != null || job.salary_max != null
-              ? "💰 " +
-                (job.salary_min ?? "—") +
-                " - " +
-                (job.salary_max ?? "—")
+              ? "💰 " + (job.salary_min ?? "—") + " - " + (job.salary_max ?? "—")
               : "💰 Salary not specified";
+
+          const skills = Array.isArray(job.skills)
+            ? job.skills.join(", ")
+            : job.skills || "Not specified";
 
           card.innerHTML =
             "<h3>" + escapeHtml(job.title) + "</h3>" +
-            '<p class="job-meta">📍 ' +
-            escapeHtml(job.location || "Location not specified") +
-            "</p>" +
-            '<p class="job-meta">💼 ' +
-            escapeHtml(job.job_type || "Job type not specified") +
-            "</p>" +
+            '<p class="job-meta">📍 ' + escapeHtml(job.location || "Location not specified") + "</p>" +
+            '<p class="job-meta">💼 ' + escapeHtml(job.job_type || "Job type not specified") + "</p>" +
             '<p class="job-meta">' + salary + "</p>" +
             "<p>" + escapeHtml(job.description || "") + "</p>" +
-            "<p><strong>Skills:</strong> " +
-            escapeHtml(
-              Array.isArray(job.skills)
-                ? job.skills.join(", ")
-                : job.skills || "Not specified"
-            ) +
-            "</p>" +
-            '<span class="job-status">' +
-            escapeHtml(job.status || "open") +
-            "</span>";
+            "<p><strong>Skills:</strong> " + escapeHtml(skills) + "</p>" +
+            '<span class="job-status">' + escapeHtml(job.status || "open") + "</span>";
 
           const button = document.createElement("button");
           button.type = "button";
@@ -479,9 +369,7 @@
 
       async function loadApplications() {
         const list = $("applicationsList");
-
-        list.innerHTML =
-          '<div class="no-jobs">Loading applications...</div>';
+        list.innerHTML = '<div class="no-jobs">Loading applications...</div>';
 
         const { data: applications, error } = await supabaseClient
           .from("applications")
@@ -490,16 +378,12 @@
           .order("created_at", { ascending: false });
 
         if (error) {
-          list.innerHTML =
-            '<div class="no-jobs">❌ Could not load applications: ' +
-            escapeHtml(error.message) +
-            "</div>";
+          list.innerHTML = '<div class="no-jobs">❌ Could not load applications: ' + escapeHtml(error.message) + "</div>";
           return;
         }
 
         if (!applications?.length) {
-          list.innerHTML =
-            '<div class="no-jobs">You have not applied for any jobs yet.</div>';
+          list.innerHTML = '<div class="no-jobs">You have not applied for any jobs yet.</div>';
           return;
         }
 
@@ -511,17 +395,11 @@
           .in("id", ids);
 
         if (jobsError) {
-          list.innerHTML =
-            '<div class="no-jobs">❌ Could not load job details: ' +
-            escapeHtml(jobsError.message) +
-            "</div>";
+          list.innerHTML = '<div class="no-jobs">❌ Could not load job details: ' + escapeHtml(jobsError.message) + "</div>";
           return;
         }
 
-        const jobsById = new Map(
-          (jobs || []).map((job) => [job.id, job])
-        );
-
+        const jobsById = new Map((jobs || []).map((job) => [job.id, job]));
         list.replaceChildren();
 
         applications.forEach((application) => {
@@ -535,27 +413,14 @@
             : "";
 
           card.innerHTML =
-            "<h3>" +
-            escapeHtml(job?.title || "Job no longer available") +
-            "</h3>" +
-            '<p class="job-meta">📍 ' +
-            escapeHtml(job?.location || "Location not specified") +
-            "</p>" +
-            '<p class="job-meta">💼 ' +
-            escapeHtml(job?.job_type || "Job type not specified") +
-            "</p>" +
-            '<p class="job-meta">Applied: ' +
-            escapeHtml(date) +
-            "</p>" +
-            "<p><strong>Cover letter:</strong> " +
-            escapeHtml(application.cover_letter || "Not provided") +
-            "</p>" +
-            '<span class="job-status">' +
-            escapeHtml(application.status || "pending") +
-            "</span>";
+            "<h3>" + escapeHtml(job?.title || "Job no longer available") + "</h3>" +
+            '<p class="job-meta">📍 ' + escapeHtml(job?.location || "Location not specified") + "</p>" +
+            '<p class="job-meta">💼 ' + escapeHtml(job?.job_type || "Job type not specified") + "</p>" +
+            '<p class="job-meta">Applied: ' + escapeHtml(date) + "</p>" +
+            "<p><strong>Cover letter:</strong> " + escapeHtml(application.cover_letter || "Not provided") + "</p>" +
+            '<span class="job-status">' + escapeHtml(application.status || "pending") + "</span>";
 
           const withdraw = document.createElement("button");
-
           withdraw.type = "button";
           withdraw.className = "secondary";
           withdraw.textContent = "Withdraw Application";
@@ -573,11 +438,7 @@
               .eq("applicant_id", currentUser.id);
 
             if (deleteError) {
-              alert(
-                "Could not withdraw application: " +
-                deleteError.message
-              );
-
+              alert("Could not withdraw application: " + deleteError.message);
               withdraw.disabled = false;
               return;
             }
@@ -590,11 +451,178 @@
         });
       }
 
+      async function loadEmployerJobs() {
+        const list = $("employerJobsList");
+
+        hideMessage("employerJobsMessage");
+        list.innerHTML = '<div class="no-jobs">Loading your jobs...</div>';
+
+        const { data: employer, error: employerError } = await supabaseClient
+          .from("employers")
+          .select("id")
+          .eq("user_id", currentUser.id)
+          .maybeSingle();
+
+        if (employerError) {
+          message("employerJobsMessage", "❌ Could not load your employer profile: " + employerError.message, true);
+          list.innerHTML = "";
+          return;
+        }
+
+        if (!employer) {
+          message("employerJobsMessage", "⚠️ Create an employer profile before managing jobs.", true);
+          list.innerHTML = "";
+          return;
+        }
+
+        const { data: jobs, error: jobsError } = await supabaseClient
+          .from("jobs")
+          .select("id,title,location,job_type,status,created_at")
+          .eq("employer_id", employer.id)
+          .order("created_at", { ascending: false });
+
+        if (jobsError) {
+          message("employerJobsMessage", "❌ Could not load your jobs: " + jobsError.message, true);
+          list.innerHTML = "";
+          return;
+        }
+
+        if (!jobs?.length) {
+          list.innerHTML = '<div class="no-jobs">You have not posted any jobs yet.</div>';
+          return;
+        }
+
+        const jobIds = jobs.map((job) => job.id);
+
+        const { data: applications, error: applicationsError } = await supabaseClient
+          .from("applications")
+          .select("id,job_id,applicant_id,status,cover_letter,created_at")
+          .in("job_id", jobIds)
+          .order("created_at", { ascending: false });
+
+        if (applicationsError) {
+          message("employerJobsMessage", "❌ Could not load applicants: " + applicationsError.message, true);
+          list.innerHTML = "";
+          return;
+        }
+
+        const applicantIds = [
+          ...new Set((applications || []).map((application) => application.applicant_id))
+        ];
+
+        let profiles = [];
+
+        if (applicantIds.length) {
+          const { data, error } = await supabaseClient
+            .from("profiles")
+            .select("id,full_name,phone,location,skills,experience,bio")
+            .in("id", applicantIds);
+
+          if (error) {
+            message("employerJobsMessage", "❌ Could not load applicant profiles: " + error.message, true);
+            list.innerHTML = "";
+            return;
+          }
+
+          profiles = data || [];
+        }
+
+        const profilesById = new Map(
+          profiles.map((profile) => [profile.id, profile])
+        );
+
+        list.replaceChildren();
+
+        jobs.forEach((job) => {
+          const card = document.createElement("article");
+          card.className = "job-card";
+
+          card.innerHTML =
+            "<h3>" + escapeHtml(job.title) + "</h3>" +
+            '<p class="job-meta">📍 ' + escapeHtml(job.location || "Location not specified") + "</p>" +
+            '<p class="job-meta">💼 ' + escapeHtml(job.job_type || "Job type not specified") + "</p>" +
+            '<span class="job-status">' + escapeHtml(job.status || "open") + "</span>" +
+            "<h4>Applicants</h4>";
+
+          const jobApplications = (applications || []).filter(
+            (application) => application.job_id === job.id
+          );
+
+          if (!jobApplications.length) {
+            const empty = document.createElement("p");
+            empty.className = "job-meta";
+            empty.textContent = "No applications yet.";
+            card.append(empty);
+          }
+
+          jobApplications.forEach((application) => {
+            const profile = profilesById.get(application.applicant_id) || {};
+            const item = document.createElement("div");
+
+            item.className = "application-item";
+
+            const skills = Array.isArray(profile.skills)
+              ? profile.skills.join(", ")
+              : profile.skills || "Not specified";
+
+            item.innerHTML =
+              "<h4>" + escapeHtml(profile.full_name || "Applicant") + "</h4>" +
+              '<p class="job-meta">📞 ' + escapeHtml(profile.phone || "Phone not provided") + "</p>" +
+              '<p class="job-meta">📍 ' + escapeHtml(profile.location || "Location not provided") + "</p>" +
+              "<p><strong>Skills:</strong> " + escapeHtml(skills) + "</p>" +
+              "<p><strong>Experience:</strong> " + escapeHtml(profile.experience || "Not provided") + "</p>" +
+              "<p><strong>Cover letter:</strong> " + escapeHtml(application.cover_letter || "Not provided") + "</p>";
+
+            const statusLabel = document.createElement("label");
+            statusLabel.textContent = "Application status";
+
+            const status = document.createElement("select");
+
+            ["pending", "reviewed", "accepted", "rejected", "withdrawn"]
+              .forEach((value) => {
+                const option = document.createElement("option");
+
+                option.value = value;
+                option.textContent =
+                  value.charAt(0).toUpperCase() + value.slice(1);
+
+                if ((application.status || "pending") === value) {
+                  option.selected = true;
+                }
+
+                status.append(option);
+              });
+
+            status.addEventListener("change", async () => {
+              status.disabled = true;
+
+              const { error } = await supabaseClient
+                .from("applications")
+                .update({ status: status.value })
+                .eq("id", application.id);
+
+              if (error) {
+                alert("Could not update application status: " + error.message);
+                status.value = application.status || "pending";
+              } else {
+                application.status = status.value;
+              }
+
+              status.disabled = false;
+            });
+
+            item.append(statusLabel, status);
+            card.append(item);
+          });
+
+          list.append(card);
+        });
+      }
+
       function openApplicationForm(jobId) {
         if (!requireUser()) return;
 
         const modal = document.createElement("div");
-
         modal.className = "modal";
 
         modal.innerHTML =
@@ -636,10 +664,7 @@
           note.classList.remove("error");
           note.textContent = "Submitting application...";
 
-          const {
-            data: existing,
-            error: checkError
-          } = await supabaseClient
+          const { data: existing, error: checkError } = await supabaseClient
             .from("applications")
             .select("id")
             .eq("job_id", jobId)
@@ -648,16 +673,13 @@
 
           if (checkError) {
             note.classList.add("error");
-            note.textContent =
-              "❌ Could not check application: " +
-              checkError.message;
+            note.textContent = "❌ Could not check application: " + checkError.message;
             return;
           }
 
           if (existing) {
             note.classList.add("error");
-            note.textContent =
-              "⚠️ You have already applied for this job.";
+            note.textContent = "⚠️ You have already applied for this job.";
             return;
           }
 
@@ -672,15 +694,11 @@
 
           if (error) {
             note.classList.add("error");
-            note.textContent =
-              "❌ Could not submit application: " +
-              error.message;
+            note.textContent = "❌ Could not submit application: " + error.message;
             return;
           }
 
-          note.textContent =
-            "✅ Application submitted successfully!";
-
+          note.textContent = "✅ Application submitted successfully!";
           setTimeout(close, 1200);
         });
 
@@ -718,9 +736,7 @@
         const coming = event.target.closest("[data-coming]");
 
         if (coming) {
-          $("comingSoonTitle").textContent =
-            coming.dataset.coming;
-
+          $("comingSoonTitle").textContent = coming.dataset.coming;
           $("comingSoonText").textContent =
             coming.dataset.coming +
             " is coming soon. We're building it for WorkHub!";
@@ -765,11 +781,7 @@
           .upsert(row, { onConflict: "id" });
 
         if (error) {
-          message(
-            "profileMessage",
-            "❌ Could not save profile: " + error.message,
-            true
-          );
+          message("profileMessage", "❌ Could not save profile: " + error.message, true);
           return;
         }
 
@@ -778,78 +790,53 @@
           currentUser.email ||
           "there";
 
-        message(
-          "profileMessage",
-          "✅ Profile saved successfully!"
-        );
+        message("profileMessage", "✅ Profile saved successfully!");
       });
 
-      $("employerProfileForm").addEventListener(
-        "submit",
-        async (event) => {
-          event.preventDefault();
+      $("employerProfileForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-          if (!requireUser()) return;
+        if (!requireUser()) return;
 
-          message(
-            "employerProfileMessage",
-            "Saving employer profile..."
-          );
+        message("employerProfileMessage", "Saving employer profile...");
 
-          const row = {
-            user_id: currentUser.id,
-            company_name: $("companyName").value.trim(),
-            description: $("companyDescription").value.trim(),
-            location: $("companyLocation").value.trim(),
-            website: $("companyWebsite").value.trim() || null
-          };
+        const row = {
+          user_id: currentUser.id,
+          company_name: $("companyName").value.trim(),
+          description: $("companyDescription").value.trim(),
+          location: $("companyLocation").value.trim(),
+          website: $("companyWebsite").value.trim() || null
+        };
 
-          const {
-            data: existing,
-            error: findError
-          } = await supabaseClient
-            .from("employers")
-            .select("id")
-            .eq("user_id", currentUser.id)
-            .maybeSingle();
+        const { data: existing, error: findError } = await supabaseClient
+          .from("employers")
+          .select("id")
+          .eq("user_id", currentUser.id)
+          .maybeSingle();
 
-          if (findError) {
-            message(
-              "employerProfileMessage",
-              "❌ Could not check employer profile: " +
-              findError.message,
-              true
-            );
-            return;
-          }
-
-          const request = existing
-            ? supabaseClient
-                .from("employers")
-                .update(row)
-                .eq("id", existing.id)
-            : supabaseClient
-                .from("employers")
-                .insert(row);
-
-          const { error } = await request;
-
-          if (error) {
-            message(
-              "employerProfileMessage",
-              "❌ Could not save employer profile: " +
-              error.message,
-              true
-            );
-            return;
-          }
-
-          message(
-            "employerProfileMessage",
-            "✅ Employer profile saved successfully!"
-          );
+        if (findError) {
+          message("employerProfileMessage", "❌ Could not check employer profile: " + findError.message, true);
+          return;
         }
-      );
+
+        const request = existing
+          ? supabaseClient
+              .from("employers")
+              .update(row)
+              .eq("id", existing.id)
+          : supabaseClient
+              .from("employers")
+              .insert(row);
+
+        const { error } = await request;
+
+        if (error) {
+          message("employerProfileMessage", "❌ Could not save employer profile: " + error.message, true);
+          return;
+        }
+
+        message("employerProfileMessage", "✅ Employer profile saved successfully!");
+      });
 
       $("jobForm").addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -858,21 +845,14 @@
 
         message("jobMessage", "Publishing job...");
 
-        const {
-          data: employer,
-          error: employerError
-        } = await supabaseClient
+        const { data: employer, error: employerError } = await supabaseClient
           .from("employers")
           .select("id")
           .eq("user_id", currentUser.id)
           .maybeSingle();
 
         if (employerError || !employer) {
-          message(
-            "jobMessage",
-            "⚠️ Please create an employer profile first.",
-            true
-          );
+          message("jobMessage", "⚠️ Please create an employer profile first.", true);
           return;
         }
 
@@ -889,30 +869,20 @@
             location: $("jobLocation").value.trim(),
             salary_min: min ? Number(min) : null,
             salary_max: max ? Number(max) : null,
-
             skills: $("jobSkills").value
               .split(",")
               .map((skill) => skill.trim())
               .filter(Boolean),
-
             status: "open"
           });
 
         if (error) {
-          message(
-            "jobMessage",
-            "❌ Could not post job: " + error.message,
-            true
-          );
+          message("jobMessage", "❌ Could not post job: " + error.message, true);
           return;
         }
 
         $("jobForm").reset();
-
-        message(
-          "jobMessage",
-          "✅ Job posted successfully!"
-        );
+        message("jobMessage", "✅ Job posted successfully!");
       });
 
       window.addEventListener("popstate", navigateFromHash);

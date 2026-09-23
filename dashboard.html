@@ -988,35 +988,166 @@
 
   <!-- FIND JOBS -->
 
-  <section
-    id="jobsSection"
-    class="panel"
+ <section
+  id="jobsSection"
+  class="panel"
+>
+
+  <button
+    class="page-back-button"
+    type="button"
+    data-page="dashboard"
   >
+    ← Back to Dashboard
+  </button>
 
-    <button
-      class="page-back-button"
-      type="button"
-      data-page="dashboard"
-    >
-      ← Back to Dashboard
-    </button>
+  <h2>🔎 Find Jobs</h2>
 
-    <h2>🔎 Find Jobs</h2>
+  <p>
+    Search and filter available jobs posted by employers.
+  </p>
 
-    <p>
-      Browse available jobs posted by employers.
-    </p>
+  <!-- JOB SEARCH -->
+  <form id="jobSearchForm" class="job-form">
 
-    <div id="jobsList">
+    <div>
+      <label for="jobSearch">
+        Search
+      </label>
 
-      <div class="no-jobs">
-        Loading jobs...
+      <input
+        id="jobSearch"
+        type="text"
+        placeholder="Job title, skills or keywords"
+      >
+    </div>
+
+
+    <div>
+      <label for="jobSearchLocation">
+        Location
+      </label>
+
+      <input
+        id="jobSearchLocation"
+        type="text"
+        placeholder="e.g. Accra"
+      >
+    </div>
+
+
+    <div>
+      <label for="jobSearchType">
+        Job Type
+      </label>
+
+      <select id="jobSearchType">
+
+        <option value="">
+          All Job Types
+        </option>
+
+        <option value="full_time">
+          Full Time
+        </option>
+
+        <option value="part_time">
+          Part Time
+        </option>
+
+        <option value="contract">
+          Contract
+        </option>
+
+        <option value="temporary">
+          Temporary
+        </option>
+
+        <option value="internship">
+          Internship
+        </option>
+
+        <option value="freelance">
+          Freelance
+        </option>
+
+      </select>
+    </div>
+
+
+    <div class="salary-row">
+
+      <div>
+
+        <label for="jobMinSalary">
+          Minimum Salary
+        </label>
+
+        <input
+          id="jobMinSalary"
+          type="number"
+          min="0"
+          placeholder="e.g. 1000"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label for="jobMaxSalary">
+          Maximum Salary
+        </label>
+
+        <input
+          id="jobMaxSalary"
+          type="number"
+          min="0"
+          placeholder="e.g. 5000"
+        >
+
       </div>
 
     </div>
 
-  </section>
 
+    <div class="actions">
+
+      <button type="submit">
+        🔎 Search Jobs
+      </button>
+
+      <button
+        type="button"
+        class="secondary"
+        id="clearJobFilters"
+      >
+        Clear Filters
+      </button>
+
+    </div>
+
+  </form>
+
+
+  <div
+    id="jobSearchMessage"
+    class="message"
+  ></div>
+
+
+  <p id="jobResultsCount"></p>
+
+
+  <div id="jobsList">
+
+    <div class="no-jobs">
+      Loading jobs...
+    </div>
+
+  </div>
+
+</section>
 
   <!-- APPLICATIONS -->
 
